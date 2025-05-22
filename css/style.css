@@ -1,0 +1,168 @@
+:root {
+    --bg: #0f0f0f;
+    --text: #f1f1f1;
+    --accent: #00c2ff;
+    --card: #1a1a1a;
+    --btn-bg: #00c2ff;
+    --btn-text: #0f0f0f;
+}
+
+[data-theme="light"] {
+    --bg: #f8f9fa;
+    --text: #111;
+    --accent: #0077cc;
+    --card: #ffffff;
+    --btn-bg: #0077cc;
+    --btn-text: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+#toggle-theme {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 8px 16px;
+    background-color: var(--card);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 20px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+header {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+header h1 {
+    font-size: 48px;
+    color: var(--accent);
+}
+
+header h1 span {
+    color: var(--text);
+}
+
+header p {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.hero {
+    padding: 60px 20px;
+}
+
+.hero-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero-text {
+    flex: 1;
+}
+
+.hero-text h2 {
+    font-size: 36px;
+}
+
+.hero-text p {
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+.hero-img {
+    flex: 1;
+    text-align: center;
+}
+
+.hero-img img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* Botão */
+.btn {
+    display: inline-block;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    padding: 14px 32px;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background-color: darken(var(--btn-bg), 10%);
+}
+
+/* Benefícios */
+.beneficios {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.beneficios h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.card {
+    background: var(--card);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    width: 300px;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: var(--accent);
+}
+
+.card p {
+    font-size: 16px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 14px;
+    margin-top: 60px;
+    color: var(--accent);
+}
