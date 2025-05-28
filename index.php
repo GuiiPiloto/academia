@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Academia TopFit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="assets/index.css">
 </head>
 <body>
     <button id="toggle-theme">🌙 Modo Claro</button>
@@ -21,7 +21,7 @@
             <div class="hero-text">
                 <h2>Eleve sua performance</h2>
                 <p>Bem-vindo à TopFit: onde cada treino é um passo mais perto do seu melhor.</p>
-                <a href="#" class="btn">Entrar no Sistema</a>
+                <a href="pages/login.php" class="btn">Entrar no Sistema</a>
             </div>
             <div class="hero-img">
                 <img src="assets/img/academia.jpg" alt="Imagem academia">
