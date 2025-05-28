@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($senha, $usuario["senha"])) {
                 $_SESSION["usuario_id"] = $usuario["id"];
                 $_SESSION["nome"] = $usuario["nome"];
-                $_SESSION["tipo"] = $usuario["tipo"]; // admin, professor ou aluno
+                $_SESSION["tipo"] = $usuario["tipo"];
                 header("Location: dashboard.php");
                 exit;
             } else {
