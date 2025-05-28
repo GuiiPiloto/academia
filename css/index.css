@@ -1,5 +1,4 @@
-
-/*STYLE INDEX.PHP */
+/* ===== Estilização INDEX.PHP ===== */
 
 :root {
     --bg-start: #121212;
@@ -245,130 +244,18 @@ footer {
         align-items: center;
     }
 
-    /* Reset básico */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f5f7fa;
-  color: #2c3e50;
-  line-height: 1.5;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-}
-
-/* Container centralizado */
-.container {
-  background: #fff;
-  max-width: 480px;
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-  padding: 2.5rem 2rem;
-}
-
-/* Título da página */
-.title {
-  font-weight: 700;
-  font-size: 2.2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  color: #34495e;
-}
-
-/* Formulário */
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Cada grupo do formulário */
-.form-group {
-  margin-bottom: 1.6rem;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Labels */
-.form-group label {
-  font-weight: 600;
-  font-size: 1rem;
-  margin-bottom: 0.6rem;
-  color: #34495e;
-}
-
-/* Inputs e selects */
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="date"],
-select {
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  border: 1.8px solid #ccc;
-  border-radius: 6px;
-  background-color: #fafafa;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  font-family: inherit;
-}
-
-/* Placeholder */
-input::placeholder {
-  color: #999;
-}
-
-/* Foco nos inputs */
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus,
-input[type="date"]:focus,
-select:focus {
-  outline: none;
-  border-color: #2980b9;
-  box-shadow: 0 0 8px rgba(41, 128, 185, 0.3);
-  background-color: #fff;
-}
-
-/* Botão enviar */
-.btn-submit {
-  padding: 0.85rem 0;
-  background-color: #2980b9;
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.2s ease;
-  user-select: none;
-  margin-top: 1.5rem;
-}
-
-.btn-submit:hover,
-.btn-submit:focus {
-  background-color: #1c5980;
-  box-shadow: 0 4px 12px rgba(41, 128, 185, 0.4);
-}
-
-/* Responsividade */
-@media (max-width: 540px) {
-  .container {
-    padding: 2rem 1.2rem;
-  }
-
-  .title {
-    font-size: 1.8rem;
-  }
+/* Responsividade básica */
+@media(max-width: 860px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-img, .hero-text {
+        max-width: 100%;
+    }
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 }
-
-    

@@ -1,50 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Cadastrar Aluno</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Usuário</title>
+  <!-- Link para o arquivo CSS externo -->
+  <link rel="stylesheet" href="css/cadastro_aluno.css">
+  <!-- Importando a fonte Roboto -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main class="container">
-        <section class="form-wrapper">
-            <h1 class="title">Cadastrar Aluno</h1>
-            <form action="processa_cadastro.php" method="POST" novalidate>
-                
-                <div class="form-group">
-                    <label for="nome">Nome Completo</label>
-                    <input type="text" id="nome" name="nome" required autocomplete="name" placeholder="Digite o nome completo" />
-                </div>
-
-                <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" required autocomplete="email" placeholder="exemplo@dominio.com" />
-                </div>
-
-                <div class="form-group">
-                    <label for="telefone">Telefone</label>
-                    <input type="tel" id="telefone" name="telefone" pattern="[0-9]{10,11}" placeholder="Somente números, ex: 11999999999" />
-                </div>
-
-                <div class="form-group">
-                    <label for="nascimento">Data de Nascimento</label>
-                    <input type="date" id="nascimento" name="nascimento" required />
-                </div>
-
-                <div class="form-group">
-                    <label for="plano">Plano</label>
-                    <select id="plano" name="plano" required>
-                        <option value="" disabled selected>Selecione o plano</option>
-                        <option value="basico">Básico</option>
-                        <option value="premium">Premium</option>
-                        <option value="vip">VIP</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn-submit">Cadastrar</button>
-            </form>
-        </section>
-    </main>
+  <div class="container">
+    <h2>Cadastro de Usuário</h2>
+    <div class="form-group">
+      <span class="icon">👤</span>
+      <input type="text" name="nome" placeholder="Nome" required>
+    </div>
+    <div class="form-group">
+      <span class="icon">✉️</span>
+      <input type="email" name="email" placeholder="Email" required>
+    </div>
+    <div class="form-group">
+      <span class="icon">🔒</span>
+      <input type="password" name="senha" placeholder="Senha" required>
+    </div>
+    <div class="form-group">
+      <span class="icon">📜</span>
+      <input type="text" name="cpf" placeholder="CPF (000.000.000-00)" required>
+    </div>
+    <div class="form-group">
+      <span class="icon">📞</span>
+      <input type="tel" name="telefone" placeholder="Telefone ((DD) 99999-9999)" required>
+    </div>
+    <div class="form-group">
+      <span class="icon">📅</span>
+      <input type="date" name="data_cadastro" required>
+    </div>
+    <button type="submit" formaction="backend.php">Cadastrar</button>
+    <div class="login-link">
+      <p>Já tem uma conta? <a href="#">Faça login</a></p>
+    </div>
+  </div>
 </body>
 </html>

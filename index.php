@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Academia TopFit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <button id="toggle-theme">🌙 Modo Claro</button>
