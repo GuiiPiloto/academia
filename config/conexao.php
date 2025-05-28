@@ -1,14 +1,12 @@
 <?php
-$servidor = "localhost";
+$host = "localhost";
 $usuario = "root";
 $senha = "";
-$banco = "academia_db";
+$banco = "topfit";
 
-// Conexão
-$conn = new mysqli($servidor, $usuario, $senha, $banco);
+$conn = new mysqli($host, $usuario, $senha, $banco);
 
-// Verifica conexão
 if ($conn->connect_error) {
-    die("Erro na conexão com o banco de dados: " . $conn->connect_error);
+    die("Erro na conexão: " . $conn->connect_error);
 }
 ?>
