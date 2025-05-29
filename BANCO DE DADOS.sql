@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28/05/2025 às 22:58
+-- Tempo de geração: 29/05/2025 às 21:27
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -44,14 +44,17 @@ CREATE TABLE `avaliacoes_fisicas` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `fichas_treino`
+-- Estrutura para tabela `fichas`
 --
 
-CREATE TABLE `fichas_treino` (
+CREATE TABLE `fichas` (
   `id` int(11) NOT NULL,
   `aluno_id` int(11) NOT NULL,
-  `treino` text NOT NULL,
-  `criado_por` int(11) NOT NULL,
+  `grupo_muscular` varchar(50) NOT NULL,
+  `exercicio` varchar(100) NOT NULL,
+  `series` int(11) NOT NULL,
+  `repeticoes` varchar(20) NOT NULL,
+  `descanso` varchar(20) NOT NULL,
   `criado_em` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -80,6 +83,7 @@ CREATE TABLE `presencas` (
   `id` int(11) NOT NULL,
   `aluno_id` int(11) NOT NULL,
   `data_presenca` date NOT NULL,
+  `horario` time NOT NULL,
   `registrada_por` int(11) DEFAULT NULL,
   `registrada_em` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -98,6 +102,13 @@ CREATE TABLE `usuarios` (
   `tipo` enum('admin','professor','aluno') NOT NULL,
   `criado_em` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `tipo`, `criado_em`) VALUES
+(1, 'Guilherme', 'gpiloto35@gmail.com', '$2y$10$RlhOaRRDSBmrWe4G8VdtNuOfzQocNgOQq6OtSEMxqTtj4GTkeamGq', 'aluno', '2025-05-29 13:37:20');
 
 -- --------------------------------------------------------
 
@@ -127,12 +138,11 @@ ALTER TABLE `avaliacoes_fisicas`
   ADD KEY `avaliado_por` (`avaliado_por`);
 
 --
--- Índices de tabela `fichas_treino`
+-- Índices de tabela `fichas`
 --
-ALTER TABLE `fichas_treino`
+ALTER TABLE `fichas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `aluno_id` (`aluno_id`),
-  ADD KEY `criado_por` (`criado_por`);
+  ADD KEY `aluno_id` (`aluno_id`);
 
 --
 -- Índices de tabela `mensagens`
@@ -175,9 +185,9 @@ ALTER TABLE `avaliacoes_fisicas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `fichas_treino`
+-- AUTO_INCREMENT de tabela `fichas`
 --
-ALTER TABLE `fichas_treino`
+ALTER TABLE `fichas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -196,7 +206,7 @@ ALTER TABLE `presencas`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `videos_treino`
@@ -216,11 +226,10 @@ ALTER TABLE `avaliacoes_fisicas`
   ADD CONSTRAINT `avaliacoes_fisicas_ibfk_2` FOREIGN KEY (`avaliado_por`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL;
 
 --
--- Restrições para tabelas `fichas_treino`
+-- Restrições para tabelas `fichas`
 --
-ALTER TABLE `fichas_treino`
-  ADD CONSTRAINT `fichas_treino_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fichas_treino_ibfk_2` FOREIGN KEY (`criado_por`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
+ALTER TABLE `fichas`
+  ADD CONSTRAINT `fichas_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `usuarios` (`id`);
 
 --
 -- Restrições para tabelas `mensagens`
