@@ -52,15 +52,15 @@ verificarLogin("aluno");
         <div class="infos">
             <div class="info-box">
                 <h4>📅 Último login</h4>
-                <p><?php echo date('d/m/Y H:i'); ?></p>
+                <p><?php echo date('d/m/Y'); ?></p>
             </div>
             <div class="info-box">
                 <h4>📈 Presença no mês</h4>
-                <p>12 de 20 dias</p>
+                <p>3 de 20 dias</p>
             </div>
             <div class="info-box">
                 <h4>🏋️ Progresso da Ficha</h4>
-                <p>Etapa 2 de 4 concluída</p>
+                <p>Etapa 4 de 4 concluída</p>
             </div>
             <div class="info-box">
                 <h4>🔥 Motivação do dia</h4>
