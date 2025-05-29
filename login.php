@@ -55,6 +55,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit">Entrar</button>
         </form>
         <a href="index.php" class="btn-voltar">← Voltar à Página Inicial</a>
+        <p class="link-cadastro">
+    Ainda não tem conta? <a href="cadastrar.php">Cadastre-se</a>
+        </p>
         <p class="creditos">© 2025 TopFit Academia</p>
     </div>
 

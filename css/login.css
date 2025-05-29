@@ -159,3 +159,21 @@ button[type="submit"]:hover {
     color: var(--text-light);
     box-shadow: 0 0 12px var(--neon);
 }
+
+.link-cadastro {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: var(--text-color-dark);
+}
+
+.link-cadastro a {
+    color: #0ff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.link-cadastro a:hover {
+    color: #0cf;
+}
+
