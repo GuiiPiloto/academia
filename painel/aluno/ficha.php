@@ -1,9 +1,11 @@
 <?php
+session_start();
 require_once "../../includes/verificar.php";
-require_once "../../config/conexao.php";
 verificarLogin("aluno");
 
-$aluno_id = $_SESSION['id'];
+require_once "../../config/conexao.php"; 
+
+$aluno_id = $_SESSION['usuario_id']; 
 $fichas = [];
 
 // Buscar ficha do aluno agrupada por grupo muscular
