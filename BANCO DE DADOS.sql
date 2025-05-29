@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29/05/2025 às 21:27
+-- Tempo de geração: 29/05/2025 às 22:44
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -24,20 +24,18 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `avaliacoes_fisicas`
+-- Estrutura para tabela `avaliacoes`
 --
 
-CREATE TABLE `avaliacoes_fisicas` (
+CREATE TABLE `avaliacoes` (
   `id` int(11) NOT NULL,
   `aluno_id` int(11) NOT NULL,
-  `peso` decimal(5,2) DEFAULT NULL,
-  `altura` decimal(4,2) DEFAULT NULL,
-  `imc` decimal(5,2) DEFAULT NULL,
-  `braco` decimal(5,2) DEFAULT NULL,
-  `perna` decimal(5,2) DEFAULT NULL,
-  `cintura` decimal(5,2) DEFAULT NULL,
   `data_avaliacao` date NOT NULL,
-  `avaliado_por` int(11) DEFAULT NULL,
+  `peso` decimal(5,2) NOT NULL,
+  `altura` decimal(4,2) NOT NULL,
+  `percentual_gordura` decimal(5,2) DEFAULT NULL,
+  `massa_magra` decimal(5,2) DEFAULT NULL,
+  `observacoes` text DEFAULT NULL,
   `criado_em` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -130,12 +128,11 @@ CREATE TABLE `videos_treino` (
 --
 
 --
--- Índices de tabela `avaliacoes_fisicas`
+-- Índices de tabela `avaliacoes`
 --
-ALTER TABLE `avaliacoes_fisicas`
+ALTER TABLE `avaliacoes`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `aluno_id` (`aluno_id`),
-  ADD KEY `avaliado_por` (`avaliado_por`);
+  ADD KEY `aluno_id` (`aluno_id`);
 
 --
 -- Índices de tabela `fichas`
@@ -179,9 +176,9 @@ ALTER TABLE `videos_treino`
 --
 
 --
--- AUTO_INCREMENT de tabela `avaliacoes_fisicas`
+-- AUTO_INCREMENT de tabela `avaliacoes`
 --
-ALTER TABLE `avaliacoes_fisicas`
+ALTER TABLE `avaliacoes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -219,11 +216,10 @@ ALTER TABLE `videos_treino`
 --
 
 --
--- Restrições para tabelas `avaliacoes_fisicas`
+-- Restrições para tabelas `avaliacoes`
 --
-ALTER TABLE `avaliacoes_fisicas`
-  ADD CONSTRAINT `avaliacoes_fisicas_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `avaliacoes_fisicas_ibfk_2` FOREIGN KEY (`avaliado_por`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL;
+ALTER TABLE `avaliacoes`
+  ADD CONSTRAINT `avaliacoes_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `usuarios` (`id`);
 
 --
 -- Restrições para tabelas `fichas`
