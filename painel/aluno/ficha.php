@@ -21,8 +21,8 @@ while ($row = $result->fetch_assoc()) {
 <html lang="pt-br" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <title>Ficha de Treino - TopFit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Treino - TopFit</title>
     <link rel="stylesheet" href="../../css/ficha-aluno.css">
 </head>
 <body>
