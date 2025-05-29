@@ -130,3 +130,32 @@ button[type="submit"]:hover {
     color: var(--neon);
     text-shadow: 0 0 4px var(--neon-soft);
 }
+
+:root {
+    --neon: #00ffe0;
+    --neon-soft: #00ffe055;
+    --text-light: #0f0f0f;
+}
+
+.btn-voltar {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 25px;
+    color: var(--neon);
+    border: 2px solid var(--neon);
+    border-radius: 25px;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    text-align: center;
+    transition: 0.3s ease;
+    box-shadow: 0 0 5px var(--neon-soft);
+    cursor: pointer;
+}
+
+.btn-voltar:hover {
+    background-color: var(--neon);
+    color: var(--text-light);
+    box-shadow: 0 0 12px var(--neon);
+}

@@ -54,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="password" name="senha" placeholder="Senha" required>
             <button type="submit">Entrar</button>
         </form>
+        <a href="index.php" class="btn-voltar">← Voltar à Página Inicial</a>
         <p class="creditos">© 2025 TopFit Academia</p>
     </div>
 
