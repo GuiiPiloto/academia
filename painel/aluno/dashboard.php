@@ -1,50 +1,72 @@
 <?php
-session_start();
-require_once "includes/verificar.php"; // Garante que o usuário está logado
-verificarLogin("aluno"); // Garante que é aluno
-
-// Aqui você pode buscar as presenças no banco quando o sistema estiver integrado
-
-$nome = $_SESSION["nome"];
+require_once "../../includes/verificar.php";
+verificarLogin("aluno");
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <title>Presenças - TopFit</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/dashboard_aluno.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Aluno - TopFit</title>
+    <link rel="stylesheet" href="../../css/dashboard-aluno.css">
 </head>
 <body>
-    <div class="container">
-        <button class="btn-voltar" onclick="window.location.href='dashboard.php'">⬅ Voltar</button>
-        <h1>Presenças de <?php echo $nome; ?></h1>
+    <div class="sidebar">
+        <h2>TopFit</h2>
+        <a href="dashboard.php">🏠 Início</a>
+        <a href="presencas.php">📅 Presenças</a>
+        <a href="ficha.php">💪 Ficha de Treino</a>
+        <a href="avaliacoes.php">📊 Avaliações</a>
+        <a href="mensagens.php">💬 Mensagens</a>
+        <a href="../../logout.php">🚪 Sair</a>
+    </div>
 
-        <div class="presencas-lista">
-            <!-- Conteúdo fictício por enquanto -->
-            <div class="presenca">
-                <p>📅 27/05/2025</p>
-                <span class="status presente">Presente</span>
+    <div class="main-content">
+        <div class="dashboard-header">
+            Bem-vindo, <?php echo $_SESSION["nome"] ?? 'Aluno'; ?>!
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Presenças</h3>
+                <a href="presencas.php">Ver minhas presenças</a>
             </div>
-            <div class="presenca">
-                <p>📅 28/05/2025</p>
-                <span class="status falta">Falta</span>
+
+            <div class="card">
+                <h3>Minha Ficha</h3>
+                <a href="ficha.php">Ver ficha de treino</a>
             </div>
-            <div class="presenca">
-                <p>📅 29/05/2025</p>
-                <span class="status presente">Presente</span>
+
+            <div class="card">
+                <h3>Avaliações</h3>
+                <a href="avaliacoes.php">Ver avaliações físicas</a>
+            </div>
+
+            <div class="card">
+                <h3>Mensagens</h3>
+                <a href="mensagens.php">Ver mensagens</a>
             </div>
         </div>
 
-        <p class="creditos">© 2025 TopFit Academia</p>
+        <div class="infos">
+            <div class="info-box">
+                <h4>📅 Último login</h4>
+                <p><?php echo date('d/m/Y H:i'); ?></p>
+            </div>
+            <div class="info-box">
+                <h4>📈 Presença no mês</h4>
+                <p>12 de 20 dias</p>
+            </div>
+            <div class="info-box">
+                <h4>🏋️ Progresso da Ficha</h4>
+                <p>Etapa 2 de 4 concluída</p>
+            </div>
+            <div class="info-box">
+                <h4>🔥 Motivação do dia</h4>
+                <p>“Cada treino é um passo mais perto do seu objetivo.”</p>
+            </div>
+        </div>
     </div>
-
-    <script>
-        // Tema claro/escuro
-        const html = document.documentElement;
-        if (localStorage.getItem("theme") === "light") {
-            html.setAttribute("data-theme", "light");
-        }
-    </script>
 </body>
 </html>
