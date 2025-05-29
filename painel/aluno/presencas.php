@@ -26,8 +26,10 @@ verificarLogin("aluno");
             Minhas Presenças
         </div>
 
-        <div class="presenca-actions">
-            <button class="btn-neon">Marcar Presença de Hoje</button>
+        <!-- Informação sobre a marcação automática -->
+        <div class="info-box">
+            <h4>Informação</h4>
+            <p>As presenças são registradas automaticamente ao passar pela catraca da academia. Qualquer dúvida, procure um professor.</p>
         </div>
 
         <div class="tabela-presencas">
@@ -55,7 +57,7 @@ verificarLogin("aluno");
                         <td>Faltou</td>
                         <td><span class="status falta">Falta</span></td>
                     </tr>
-                    <!-- Exemplo, depois vamos puxar do banco -->
+                    <!-- Em breve: registros reais puxados do banco de dados -->
                 </tbody>
             </table>
         </div>
