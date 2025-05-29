@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29/05/2025 às 22:44
+-- Tempo de geração: 30/05/2025 às 01:32
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -64,11 +64,11 @@ CREATE TABLE `fichas` (
 
 CREATE TABLE `mensagens` (
   `id` int(11) NOT NULL,
-  `remetente_id` int(11) NOT NULL,
-  `destinatario_id` int(11) NOT NULL,
+  `aluno_id` int(11) NOT NULL,
+  `professor_id` int(11) NOT NULL,
   `mensagem` text NOT NULL,
-  `lida` tinyint(1) DEFAULT 0,
-  `enviada_em` timestamp NOT NULL DEFAULT current_timestamp()
+  `remetente` enum('aluno','professor') NOT NULL,
+  `enviado_em` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -108,21 +108,6 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `tipo`, `criado_em`) VALUES
 (1, 'Guilherme', 'gpiloto35@gmail.com', '$2y$10$RlhOaRRDSBmrWe4G8VdtNuOfzQocNgOQq6OtSEMxqTtj4GTkeamGq', 'aluno', '2025-05-29 13:37:20');
 
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `videos_treino`
---
-
-CREATE TABLE `videos_treino` (
-  `id` int(11) NOT NULL,
-  `titulo` varchar(100) NOT NULL,
-  `descricao` text DEFAULT NULL,
-  `url_video` text NOT NULL,
-  `criado_por` int(11) DEFAULT NULL,
-  `criado_em` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Índices para tabelas despejadas
 --
@@ -146,8 +131,8 @@ ALTER TABLE `fichas`
 --
 ALTER TABLE `mensagens`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `remetente_id` (`remetente_id`),
-  ADD KEY `destinatario_id` (`destinatario_id`);
+  ADD KEY `aluno_id` (`aluno_id`),
+  ADD KEY `professor_id` (`professor_id`);
 
 --
 -- Índices de tabela `presencas`
@@ -163,13 +148,6 @@ ALTER TABLE `presencas`
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
-
---
--- Índices de tabela `videos_treino`
---
-ALTER TABLE `videos_treino`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `criado_por` (`criado_por`);
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
@@ -206,12 +184,6 @@ ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de tabela `videos_treino`
---
-ALTER TABLE `videos_treino`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- Restrições para tabelas despejadas
 --
 
@@ -231,8 +203,8 @@ ALTER TABLE `fichas`
 -- Restrições para tabelas `mensagens`
 --
 ALTER TABLE `mensagens`
-  ADD CONSTRAINT `mensagens_ibfk_1` FOREIGN KEY (`remetente_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `mensagens_ibfk_2` FOREIGN KEY (`destinatario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `mensagens_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `mensagens_ibfk_2` FOREIGN KEY (`professor_id`) REFERENCES `usuarios` (`id`);
 
 --
 -- Restrições para tabelas `presencas`
@@ -240,12 +212,6 @@ ALTER TABLE `mensagens`
 ALTER TABLE `presencas`
   ADD CONSTRAINT `presencas_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `presencas_ibfk_2` FOREIGN KEY (`registrada_por`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL;
-
---
--- Restrições para tabelas `videos_treino`
---
-ALTER TABLE `videos_treino`
-  ADD CONSTRAINT `videos_treino_ibfk_1` FOREIGN KEY (`criado_por`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
