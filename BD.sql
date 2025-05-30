@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30/05/2025 às 20:00
+-- Tempo de geração: 30/05/2025 às 22:59
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -109,7 +109,7 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `tipo`, `criado_em`) VALUES
 (1, 'Guilherme', 'gpiloto35@gmail.com', '$2y$10$RlhOaRRDSBmrWe4G8VdtNuOfzQocNgOQq6OtSEMxqTtj4GTkeamGq', 'aluno', '2025-05-29 13:37:20'),
-(5, 'João Professor', 'professor@topfit.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'professor', '2025-05-30 17:23:27');
+(5, 'João', 'professor@topfit.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'professor', '2025-05-30 17:23:27');
 
 --
 -- Índices para tabelas despejadas

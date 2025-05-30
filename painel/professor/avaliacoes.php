@@ -44,6 +44,8 @@ if ($alunoSelecionado) {
 <html lang="pt-br" data-theme="dark">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/academia/assets/img/icone.png" type="image/png">
     <title>Avaliações Físicas - TOPFIT</title>
     <link rel="stylesheet" href="../../css/avaliacoes-professor.css">
 </head>
