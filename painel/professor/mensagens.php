@@ -3,55 +3,50 @@ require_once "../../includes/verificar.php";
 require_once "../../config/conexao.php";
 verificarLogin("professor");
 
-$professor_id = $_SESSION['id'];
+$professor_id = $_SESSION["id"];
+$nome_professor = $_SESSION["nome"] ?? 'Professor';
 
-$stmtAlunos = $conn->prepare("
-    SELECT DISTINCT a.id, a.nome 
-    FROM mensagens m 
-    JOIN alunos a ON m.aluno_id = a.id 
-    WHERE m.professor_id = ?
+$alunos_query = $conn->prepare("
+    SELECT DISTINCT u.id, u.nome 
+    FROM usuarios u
+    JOIN mensagens m ON u.id = m.aluno_id
+    WHERE m.professor_id = ? AND u.tipo = 'aluno'
 ");
-$stmtAlunos->bind_param("i", $professor_id);
-$stmtAlunos->execute();
-$resultAlunos = $stmtAlunos->get_result();
+$alunos_query->bind_param("i", $professor_id);
+$alunos_query->execute();
+$alunos_result = $alunos_query->get_result();
 
-$alunos = [];
-while ($row = $resultAlunos->fetch_assoc()) {
-    $alunos[] = $row;
-}
-
-$alunoSelecionado = $_GET['aluno_id'] ?? null;
+$aluno_selecionado = $_GET["aluno"] ?? null;
 $mensagens = [];
 
-if ($alunoSelecionado) {
-    // Marcar mensagens do aluno como lidas
-    $marcarLidas = $conn->prepare("UPDATE mensagens SET lida = 1 WHERE professor_id = ? AND aluno_id = ? AND remetente = 'aluno'");
-    $marcarLidas->bind_param("ii", $professor_id, $alunoSelecionado);
-    $marcarLidas->execute();
+if ($aluno_selecionado) {
+    // Atualiza status de leitura
+    $conn->prepare("UPDATE mensagens SET lida = 1 WHERE aluno_id = ? AND professor_id = ? AND remetente = 'aluno'")
+        ->bind_param("ii", $aluno_selecionado, $professor_id)
+        ->execute();
 
-    // Buscar mensagens trocadas
-    $stmtMsg = $conn->prepare("
+    // Buscar mensagens
+    $mensagem_query = $conn->prepare("
         SELECT * FROM mensagens 
-        WHERE professor_id = ? AND aluno_id = ? 
+        WHERE aluno_id = ? AND professor_id = ?
         ORDER BY enviado_em ASC
     ");
-    $stmtMsg->bind_param("ii", $professor_id, $alunoSelecionado);
-    $stmtMsg->execute();
-    $resultMsgs = $stmtMsg->get_result();
-
-    while ($row = $resultMsgs->fetch_assoc()) {
-        $mensagens[] = $row;
-    }
+    $mensagem_query->bind_param("ii", $aluno_selecionado, $professor_id);
+    $mensagem_query->execute();
+    $mensagens = $mensagem_query->get_result();
 }
 
-// Enviar nova mensagem
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mensagem']) && $alunoSelecionado) {
-    $mensagem = trim($_POST['mensagem']);
+// Envio de nova mensagem
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["mensagem"]) && $aluno_selecionado) {
+    $mensagem = trim($_POST["mensagem"]);
     if (!empty($mensagem)) {
-        $stmtEnvio = $conn->prepare("INSERT INTO mensagens (aluno_id, professor_id, mensagem, remetente, enviado_em, lida) VALUES (?, ?, ?, 'professor', NOW(), 0)");
-        $stmtEnvio->bind_param("iis", $alunoSelecionado, $professor_id, $mensagem);
-        $stmtEnvio->execute();
-        header("Location: mensagens.php?aluno_id=$alunoSelecionado");
+        $inserir = $conn->prepare("
+            INSERT INTO mensagens (aluno_id, professor_id, mensagem, remetente, enviado_em, lida)
+            VALUES (?, ?, ?, 'professor', NOW(), 0)
+        ");
+        $inserir->bind_param("iis", $aluno_selecionado, $professor_id, $mensagem);
+        $inserir->execute();
+        header("Location: mensagens.php?aluno=$aluno_selecionado");
         exit;
     }
 }
@@ -61,77 +56,86 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mensagem']) && $aluno
 <html lang="pt-BR" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <title>Mensagens - TOPFIT</title>
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/mensagens.css">
+    <title>Mensagens - Professor</title>
+    <link rel="stylesheet" href="../../css/mensagens-professor.css">
+    <style>
+        .chat-box {
+            border: 1px solid #444;
+            padding: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+        .mensagem.professor {
+            text-align: right;
+            color: #0f0;
+        }
+        .mensagem.aluno {
+            text-align: left;
+            color: #0cf;
+        }
+        .form-mensagem {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .form-mensagem input[type="text"] {
+            flex: 1;
+            padding: 0.5rem;
+            border-radius: 6px;
+            border: 1px solid #666;
+        }
+        .form-mensagem button {
+            padding: 0.5rem 1rem;
+        }
+        .aluno-select {
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body>
-    <button id="toggle-theme">🌙 Modo Claro</button>
 
-    <div class="sidebar">
-        <h2>TOPFIT</h2>
-        <a href="dashboard.php">🏠 Início</a>
-        <a href="fichas.php">💪 Fichas de Treino</a>
-        <a href="avaliacoes.php">📊 Avaliações</a>
-        <a href="mensagens.php" class="active">💬 Mensagens</a>
-        <a href="../../logout.php">🚪 Sair</a>
-    </div>
+<div class="sidebar">
+    <h2>TOPFIT</h2>
+    <a href="dashboard.php">🏠 Início</a>
+    <a href="fichas.php">💪 Fichas de Treino</a>
+    <a href="avaliacoes.php">📊 Avaliações</a>
+    <a href="mensagens.php" class="active">💬 Mensagens</a>
+    <a href="../../index.php">🚪 Sair</a>
+</div>
 
-    <div class="main-content">
-        <h1>Mensagens com Alunos</h1>
-        <div class="mensagens-container">
-            <div class="lista-alunos">
-                <h3>Alunos</h3>
-                <ul>
-                    <?php foreach ($alunos as $aluno): ?>
-                        <li>
-                            <a href="?aluno_id=<?= $aluno['id'] ?>" <?= ($aluno['id'] == $alunoSelecionado) ? 'class="ativo"' : '' ?>>
-                                <?= htmlspecialchars($aluno['nome']) ?>
-                            </a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
+<div class="main-content">
+    <h1>Mensagens</h1>
 
-            <div class="chat-area">
-                <?php if ($alunoSelecionado): ?>
-                    <div class="mensagens">
-                        <?php foreach ($mensagens as $msg): ?>
-                            <div class="mensagem <?= $msg['remetente'] === 'professor' ? 'enviada' : 'recebida' ?>">
-                                <p><?= nl2br(htmlspecialchars($msg['mensagem'])) ?></p>
-                                <span><?= date('d/m/Y H:i', strtotime($msg['enviado_em'])) ?></span>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
+    <form method="get" class="aluno-select">
+        <label for="aluno">Selecionar Aluno:</label>
+        <select name="aluno" id="aluno" onchange="this.form.submit()">
+            <option value="">-- Escolha um aluno --</option>
+            <?php while ($aluno = $alunos_result->fetch_assoc()): ?>
+                <option value="<?= $aluno['id'] ?>" <?= ($aluno_selecionado == $aluno['id']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($aluno['nome']) ?>
+                </option>
+            <?php endwhile; ?>
+        </select>
+    </form>
 
-                    <form method="post" class="form-mensagem">
-                        <textarea name="mensagem" required placeholder="Digite sua mensagem..."></textarea>
-                        <button type="submit">Enviar</button>
-                    </form>
-                <?php else: ?>
-                    <p class="aviso">Selecione um aluno para visualizar as mensagens.</p>
-                <?php endif; ?>
-            </div>
+    <?php if ($aluno_selecionado): ?>
+        <div class="chat-box">
+            <?php foreach ($mensagens as $msg): ?>
+                <div class="mensagem <?= $msg['remetente'] ?>">
+                    <strong><?= $msg['remetente'] === 'professor' ? 'Você' : 'Aluno' ?>:</strong>
+                    <?= htmlspecialchars($msg['mensagem']) ?>
+                    <small><br><?= date('d/m/Y H:i', strtotime($msg['enviado_em'])) ?></small>
+                </div>
+                <hr>
+            <?php endforeach; ?>
         </div>
-    </div>
 
-    <script>
-        const toggleButton = document.getElementById('toggle-theme');
-        const htmlElement = document.documentElement;
+        <form method="post" class="form-mensagem">
+            <input type="text" name="mensagem" placeholder="Digite sua mensagem..." required>
+            <button type="submit">Enviar</button>
+        </form>
+    <?php endif; ?>
+</div>
 
-        function applyTheme(theme) {
-            htmlElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            toggleButton.textContent = (theme === 'light') ? '🌑 Modo Escuro' : '🌙 Modo Claro';
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            applyTheme(savedTheme);
-            toggleButton.addEventListener('click', () => {
-                applyTheme(htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-            });
-        });
-    </script>
 </body>
 </html>

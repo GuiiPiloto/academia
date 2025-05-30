@@ -1,193 +1,449 @@
-.mensagens-container {
+:root {
+    --base-bg-dark: #080808;
+    --base-bg-light: #f0f0f0;
+    --base-text-dark: #e0e0e0;
+    --base-text-light: #1a1a1a;
+    --base-primary-neon: #00ffff;
+    --base-secondary-neon: #ff00cc;
+
+    --main-bg: var(--base-bg-dark);
+    --primary-text-color: var(--base-text-dark);
+    --secondary-text-color: #a0a0a0;
+    --panel-bg: #151515;
+    --card-bg: #222222;
+
+    --border-light: rgba(0, 255, 255, 0.2);
+    --border-medium: rgba(0, 255, 255, 0.35);
+    --shadow-light: 0 0 8px rgba(0, 255, 255, 0.3);
+    --shadow-medium: 0 0 15px rgba(0, 255, 255, 0.45);
+    --shadow-strong: 0 0 25px rgba(0, 255, 255, 0.6);
+
+    --accent-primary: var(--base-primary-neon);
+    --accent-secondary: var(--base-secondary-neon);
+
+    --button-toggle-bg: transparent;
+    --button-toggle-border: var(--accent-primary);
+    --button-toggle-color: var(--accent-primary);
+    --button-toggle-hover-bg: var(--accent-primary);
+    --button-toggle-hover-color: var(--base-bg-dark);
+    --button-toggle-shadow: var(--shadow-light);
+
+    --nav-card-border: var(--accent-secondary);
+    --nav-card-text: var(--secondary-text-color);
+    --nav-card-active-text: var(--base-bg-dark);
+    --nav-card-hover-bg: rgba(0, 255, 255, 0.1);
+    --nav-card-active-bg: var(--accent-primary);
+    --nav-card-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+    --nav-card-active-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+
+    --info-box-bg: var(--card-bg);
+    --info-box-border: var(--border-light);
+    --info-box-shadow: var(--shadow-light);
+    --info-box-text-color: var(--primary-text-color);
+    --info-box-title-color: var(--accent-primary);
+
+    --status-presente: #00ff88;
+    --status-falta: #ff4d4d;
+    --status-text-dark: #000;
+
+    --light-main-bg: #f0f0f0;
+    --light-primary-text-color: #1a1a1a;
+    --light-secondary-text-color: #777;
+    --light-panel-bg: #ffffff;
+    --light-card-bg: #f8f8f8;
+
+    --light-border-light: rgba(0, 119, 179, 0.15);
+    --light-border-medium: rgba(0, 119, 179, 0.25);
+    --light-shadow-light: 0 0 8px rgba(0, 119, 179, 0.1);
+    --light-shadow-medium: 0 0 15px rgba(0, 119, 179, 0.15);
+    --light-shadow-strong: 0 0 25px rgba(0, 119, 179, 0.2);
+
+    --light-accent-primary: #0077b3;
+    --light-accent-secondary: #a00080;
+
+    --light-button-toggle-border: var(--light-accent-primary);
+    --light-button-toggle-color: var(--light-accent-primary);
+    --light-button-toggle-hover-bg: var(--light-accent-primary);
+    --light-button-toggle-hover-color: var(--light-main-bg);
+    --light-button-toggle-shadow: var(--light-shadow-light);
+
+    --light-nav-card-border: rgba(0, 119, 179, 0.5);
+    --light-nav-card-text: #000000;
+    --light-nav-card-active-text: var(--light-main-bg);
+    --light-nav-card-hover-bg: rgba(0, 119, 179, 0.08);
+    --light-nav-card-active-bg: var(--light-accent-primary);
+    --light-nav-card-shadow: 0 0 12px rgba(0, 119, 179, 0.4);
+    --light-nav-card-active-shadow: 0 0 20px rgba(0, 119, 179, 0.6);
+
+    --light-info-box-bg: var(--light-card-bg);
+    --light-info-box-border: var(--light-border-light);
+    --light-info-box-shadow: var(--light-shadow-light);
+    --light-info-box-text-color: var(--light-primary-text-color);
+    --light-info-box-title-color: var(--light-info-box-title-color);
+
+    --light-status-presente: #00a854;
+    --light-status-falta: #cc3333;
+    --light-status-text-dark: #fff;
+
+    --select-arrow-svg: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FF00CC%22%20d%3D%22M287%2C197.8l-133.4%2C133.4c-2.7%2C2.7-6.2%2C4-9.7%2C4s-7-1.3-9.7-4L5.4%2C197.8c-7.2-7.2-7.2-18.8%2C0-26s18.8-7.2%2C26%2C0l104.9%2C104.9L256.3%2C171.8c7.2-7.2%2C18.8-7.2%2C26%2C0S294.2%2C190.6%2C287%2C197.8z%22%2F%3E%3C%2Fsvg%3E');
+}
+
+[data-theme="light"] {
+    --main-bg: var(--light-main-bg);
+    --primary-text-color: var(--light-primary-text-color);
+    --secondary-text-color: var(--light-secondary-text-color);
+    --panel-bg: var(--light-panel-bg);
+    --card-bg: var(--light-card-bg);
+
+    --border-light: var(--light-border-light);
+    --border-medium: var(--light-border-medium);
+    --shadow-light: var(--light-shadow-light);
+    --shadow-medium: var(--light-shadow-medium);
+    --shadow-strong: var(--light-shadow-strong);
+
+    --accent-primary: var(--light-accent-primary);
+    --accent-secondary: var(--light-accent-secondary);
+
+    --button-toggle-bg: var(--light-button-toggle-bg);
+    --button-toggle-border: var(--light-button-toggle-border);
+    --button-toggle-color: var(--light-button-toggle-color);
+    --button-toggle-hover-bg: var(--light-button-toggle-hover-bg);
+    --button-toggle-hover-color: var(--light-button-toggle-hover-color);
+    --button-toggle-shadow: var(--light-button-toggle-shadow);
+
+    --nav-card-border: var(--light-nav-card-border);
+    --nav-card-text: var(--light-nav-card-text);
+    --nav-card-active-text: var(--light-nav-card-active-text);
+    --nav-card-hover-bg: var(--light-nav-card-hover-bg);
+    --nav-card-active-bg: var(--light-nav-card-active-bg);
+    --nav-card-shadow: var(--light-nav-card-shadow);
+    --nav-card-active-shadow: var(--light-nav-card-active-shadow);
+
+    --info-box-bg: var(--light-info-box-bg);
+    --info-box-border: var(--light-info-box-border);
+    --info-box-shadow: var(--light-info-box-shadow);
+    --info-box-text-color: var(--light-primary-text-color);
+    --info-box-title-color: var(--light-info-box-title-color);
+
+    --status-presente: var(--light-status-presente);
+    --status-falta: var(--light-status-falta);
+    --status-text-dark: var(--light-status-text-dark);
+
+    --select-arrow-svg: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%230077B3%22%20d%3D%22M287%2C197.8l-133.4%2C133.4c-2.7%2C2.7-6.2%2C4-9.7%2C4s-7-1.3-9.7-4L5.4%2C197.8c-7.2-7.2-7.2-18.8%2C0-26s18.8-7.2%2C26%2C0l104.9%2C104.9L256.3%2C171.8c7.2-7.2%2C18.8-7.2%2C26%2C0S294.2%2C190.6%2C287%2C197.8z%22%2F%3E%3C%2Fsvg%3E');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    background-color: var(--main-bg);
+    color: var(--primary-text-color);
     display: flex;
-    gap: 25px;
+    transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 250px;
+    background: var(--panel-bg);
+    padding: 20px;
+    padding-top: 50px;
+    position: fixed;
+    height: 100vh;
+    box-shadow: 3px 0 15px var(--shadow-medium);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    border-right: 1px solid var(--border-light);
+    animation: slideInLeft 0.5s ease-out;
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.sidebar h2 {
+    color: var(--accent-primary);
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 900;
+    text-shadow: 0 0 8px var(--accent-primary), 0 0 15px rgba(0, 255, 255, 0.4);
+    letter-spacing: 1.5px;
+}
+
+.sidebar nav {
+    flex-grow: 1;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+    text-decoration: none;
+    color: var(--secondary-text-color);
+    padding: 12px 15px;
+    border-radius: 10px;
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.sidebar a:hover {
+    background: var(--nav-card-hover-bg);
+    color: var(--primary-text-color);
+    box-shadow: var(--nav-card-shadow);
+    transform: translateX(8px) scale(1.02);
+}
+
+.sidebar a.active {
+    background: var(--nav-card-active-bg);
+    color: var(--nav-card-active-text);
+    font-weight: 700;
+    box-shadow: var(--nav-card-active-shadow);
+    transform: translateX(0) scale(1);
+    border: 1px solid rgba(0, 255, 255, 0.8);
+}
+
+.main-content {
+    margin-left: 250px;
+    flex-grow: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.8s ease-out;
+    width: calc(100% - 250px);
+    height: 100vh;
+    overflow-y: auto;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.main-content > h1 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    color: var(--accent-primary);
+    font-weight: 900;
+    text-shadow: 0 0 8px var(--accent-primary), 0 0 15px rgba(0, 255, 255, 0.4);
+    text-align: center;
+    letter-spacing: 1.5px;
     width: 100%;
-    max-width: 1200px;
-    height: calc(100vh - 180px);
+    max-width: 700px;
+}
+
+.main-content p {
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    opacity: 0.9;
+}
+
+#toggle-theme {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    padding: 10px 22px;
+    background: var(--button-toggle-bg);
+    border: 2px solid var(--button-toggle-border);
+    color: var(--button-toggle-color);
+    font-weight: 700;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1001;
+    box-shadow: var(--button-toggle-shadow);
+    letter-spacing: 0.5px;
+    font-size: 1rem;
+}
+#toggle-theme:hover {
+    background: var(--button-toggle-hover-bg);
+    color: var(--button-toggle-hover-color);
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-3px) scale(1.02);
+}
+#toggle-theme:active {
+    transform: translateY(0);
+}
+
+.aluno-select {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 30px;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 18px rgba(255, 0, 204, 0.4);
+    border: 2px solid var(--accent-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.aluno-select label {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--primary-text-color);
+}
+
+.aluno-select select {
+    width: 100%;
+    background: var(--panel-bg);
+    color: var(--primary-text-color);
+    padding: 14px 20px;
+    border: 1px solid var(--accent-secondary);
+    border-radius: 10px;
+    font-size: 1.05rem;
+    box-shadow: 0 0 10px rgba(255, 0, 204, 0.3);
+    transition: all 0.3s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: var(--select-arrow-svg);
+    background-repeat: no-repeat;
+    background-position: right 18px center;
+    background-size: 18px auto;
+    cursor: pointer;
+}
+
+[data-theme="light"] .aluno-select select {
+    background-image: var(--select-arrow-svg);
+}
+
+.aluno-select select:hover {
+    border-color: var(--accent-secondary);
+    box-shadow: 0 0 20px rgba(255, 0, 204, 0.5);
+    transform: translateY(-2px);
+}
+.aluno-select select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 25px var(--accent-primary);
+}
+
+.aluno-select select option {
+    background-color: var(--panel-bg);
+    color: var(--primary-text-color);
+}
+.aluno-select select option:checked {
+    background-color: var(--accent-secondary);
+    color: var(--base-bg-dark);
+}
+
+.chat-box {
+    width: 100%;
+    max-width: 800px;
     background: var(--panel-bg);
     border-radius: 15px;
     box-shadow: var(--shadow-medium);
     border: 1px solid var(--border-medium);
-    overflow: hidden;
-}
-
-.lista-alunos {
-    flex: 0 0 280px;
     padding: 20px;
-    background: var(--card-bg);
-    border-right: 1px solid var(--border-light);
+    max-height: 500px;
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.lista-alunos h3 {
-    color: var(--accent-primary);
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-    text-align: center;
-    text-shadow: 0 0 5px var(--accent-primary);
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-medium);
-}
-
-.lista-alunos ul {
-    list-style: none;
-    padding: 0;
-    flex-grow: 1;
-}
-
-.lista-alunos li {
-    margin-bottom: 10px;
-}
-
-.lista-alunos a {
-    display: block;
-    padding: 12px 15px;
-    background: transparent;
-    color: var(--primary-text-color);
-    text-decoration: none;
-    border-radius: 8px;
-    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-    border: 1px solid transparent;
-    font-weight: 500;
-}
-
-.lista-alunos a:hover {
-    background: rgba(0, 255, 255, 0.1);
-    color: var(--accent-primary);
-    box-shadow: var(--shadow-light);
-    transform: translateX(5px);
-    border-color: var(--accent-primary);
-}
-
-.lista-alunos a.ativo {
-    background: var(--accent-secondary);
-    color: var(--base-bg-dark);
-    font-weight: 700;
-    box-shadow: 0 0 15px var(--accent-secondary);
-    border-color: var(--accent-secondary);
-    transform: translateX(0);
-}
-
-[data-theme="light"] .lista-alunos a.ativo {
-    color: var(--light-main-bg);
-}
-
-
-.chat-area {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
-}
-
-.chat-area .aviso {
-    text-align: center;
-    color: var(--secondary-text-color);
-    margin: auto;
-    font-size: 1.2rem;
-    padding: 20px;
-    background-color: var(--card-bg);
-    border-radius: 10px;
-    border: 1px dashed var(--border-light);
-    box-shadow: var(--shadow-light);
-}
-
-.mensagens {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding-right: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
     margin-bottom: 20px;
 }
 
-.mensagens::-webkit-scrollbar {
+.chat-box::-webkit-scrollbar {
     width: 8px;
 }
 
-.mensagens::-webkit-scrollbar-track {
+.chat-box::-webkit-scrollbar-track {
     background: var(--panel-bg);
     border-radius: 10px;
 }
 
-.mensagens::-webkit-scrollbar-thumb {
+.chat-box::-webkit-scrollbar-thumb {
     background-color: var(--accent-secondary);
     border-radius: 10px;
     border: 2px solid var(--panel-bg);
 }
 
 .mensagem {
-    max-width: 70%;
-    padding: 12px 18px;
-    border-radius: 18px;
+    padding: 10px 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
     line-height: 1.5;
     word-wrap: break-word;
     box-shadow: var(--shadow-light);
-    position: relative;
     font-size: 0.95rem;
+    position: relative;
 }
 
-.mensagem p {
-    margin: 0 0 5px 0;
-    color: inherit;
-    font-weight: normal;
-    background: none;
-    padding: 0;
-    border: none;
-    box-shadow: none;
-    text-align: left;
+.mensagem strong {
+    font-weight: 700;
+    margin-right: 5px;
 }
 
-.mensagem span {
+.mensagem small {
     display: block;
     font-size: 0.75em;
-    color: var(--secondary-text-color);
-    text-align: right;
-    margin-top: 5px;
     opacity: 0.7;
+    margin-top: 5px;
 }
 
-.mensagem.recebida {
+.mensagem.professor {
+    background-color: rgba(255, 0, 204, 0.15);
+    color: var(--primary-text-color);
+    text-align: right;
+    border: 1px solid var(--accent-secondary);
+    margin-left: 20%;
+    border-bottom-right-radius: 4px;
+}
+.mensagem.professor strong {
+    color: var(--accent-secondary);
+}
+.mensagem.professor small {
+    color: rgba(255, 0, 204, 0.8);
+}
+
+
+.mensagem.aluno {
     background-color: rgba(0, 255, 255, 0.15);
     color: var(--primary-text-color);
-    align-self: flex-start;
-    border-bottom-left-radius: 5px;
-    border: 1px solid var(--accent-primary);
-}
-
-.mensagem.recebida span {
     text-align: left;
+    border: 1px solid var(--accent-primary);
+    margin-right: 20%;
+    border-bottom-left-radius: 4px;
+}
+.mensagem.aluno strong {
+    color: var(--accent-primary);
+}
+.mensagem.aluno small {
     color: rgba(0, 255, 255, 0.8);
 }
 
-.mensagem.enviada {
-    background-color: rgba(255, 0, 204, 0.15);
-    color: var(--primary-text-color);
-    align-self: flex-end;
-    border-bottom-right-radius: 5px;
-    border: 1px solid var(--accent-secondary);
-}
 
-.mensagem.enviada span {
-    text-align: right;
-    color: rgba(255, 0, 204, 0.8);
+.chat-box hr {
+    border: none;
+    border-top: 1px dashed var(--border-light);
+    margin: 15px 0;
 }
 
 .form-mensagem {
     display: flex;
     gap: 15px;
-    margin-top: auto;
+    width: 100%;
+    max-width: 800px;
     padding-top: 15px;
     border-top: 1px solid var(--border-light);
 }
 
-.form-mensagem textarea {
+.form-mensagem input[type="text"] {
     flex-grow: 1;
     padding: 12px 15px;
     border-radius: 10px;
@@ -195,14 +451,11 @@
     background: var(--card-bg);
     color: var(--primary-text-color);
     font-size: 1rem;
-    resize: vertical;
-    min-height: 50px;
-    max-height: 120px;
     box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
     transition: all 0.3s ease;
 }
 
-.form-mensagem textarea:focus {
+.form-mensagem input[type="text"]:focus {
     outline: none;
     border-color: var(--accent-secondary);
     box-shadow: 0 0 12px var(--accent-secondary);
@@ -232,87 +485,92 @@
     box-shadow: 0 0 10px var(--accent-primary);
 }
 
-[data-theme="light"] .mensagens-container {
+
+[data-theme="light"] .aluno-select {
+    background: var(--light-card-bg);
+    box-shadow: 0 0 18px rgba(0, 119, 179, 0.2);
+    border: 2px solid var(--light-accent-secondary);
+}
+
+[data-theme="light"] .aluno-select select {
+    background: var(--light-panel-bg);
+    color: var(--light-primary-text-color);
+    border: 1px solid var(--light-accent-secondary);
+    box-shadow: 0 0 10px rgba(0, 119, 179, 0.15);
+}
+
+[data-theme="light"] .aluno-select select:hover {
+    border-color: var(--light-accent-secondary);
+    box-shadow: 0 0 20px rgba(0, 119, 179, 0.25);
+}
+[data-theme="light"] .aluno-select select:focus {
+    border-color: var(--light-accent-primary);
+    box-shadow: 0 0 25px var(--light-accent-primary);
+}
+
+[data-theme="light"] .aluno-select select option {
+    background-color: var(--light-panel-bg);
+    color: var(--light-primary-text-color);
+}
+[data-theme="light"] .aluno-select select option:checked {
+    background-color: var(--light-accent-secondary);
+    color: var(--light-main-bg);
+}
+
+[data-theme="light"] .chat-box {
     background: var(--light-panel-bg);
     box-shadow: var(--light-shadow-medium);
     border: 1px solid var(--light-border-medium);
 }
 
-[data-theme="light"] .lista-alunos {
-    background: var(--light-card-bg);
-    border-right: 1px solid var(--light-border-light);
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
-}
-
-[data-theme="light"] .lista-alunos h3 {
-    color: var(--light-accent-primary);
-    text-shadow: none;
-    border-bottom: 1px solid var(--light-border-medium);
-}
-
-[data-theme="light"] .lista-alunos a {
-    color: var(--light-primary-text-color);
-}
-
-[data-theme="light"] .lista-alunos a:hover {
-    background: rgba(0, 119, 179, 0.1);
-    color: var(--light-accent-primary);
-    box-shadow: var(--light-shadow-light);
-    border-color: var(--light-accent-primary);
-}
-
-[data-theme="light"] .lista-alunos a.ativo {
-    background: var(--light-accent-secondary);
-    color: var(--light-main-bg);
-    box-shadow: 0 0 15px var(--light-accent-secondary);
-    border-color: var(--light-accent-secondary);
-}
-
-[data-theme="light"] .chat-area .aviso {
-    background-color: var(--light-card-bg);
-    border: 1px dashed var(--light-border-light);
-    box-shadow: var(--light-shadow-light);
-}
-
-[data-theme="light"] .mensagens::-webkit-scrollbar-track {
+[data-theme="light"] .chat-box::-webkit-scrollbar-track {
     background: var(--light-panel-bg);
 }
 
-[data-theme="light"] .mensagens::-webkit-scrollbar-thumb {
+[data-theme="light"] .chat-box::-webkit-scrollbar-thumb {
     background-color: var(--light-accent-secondary);
     border: 2px solid var(--light-panel-bg);
 }
 
-[data-theme="light"] .mensagem.recebida {
-    background-color: rgba(0, 119, 179, 0.1);
-    border: 1px solid var(--light-accent-primary);
-}
-
-[data-theme="light"] .mensagem.recebida span {
-    color: rgba(0, 119, 179, 0.8);
-}
-
-[data-theme="light"] .mensagem.enviada {
+[data-theme="light"] .mensagem.professor {
     background-color: rgba(160, 0, 128, 0.1);
     border: 1px solid var(--light-accent-secondary);
 }
-
-[data-theme="light"] .mensagem.enviada span {
+[data-theme="light"] .mensagem.professor strong {
+    color: var(--light-accent-secondary);
+}
+[data-theme="light"] .mensagem.professor small {
     color: rgba(160, 0, 128, 0.8);
+}
+
+
+[data-theme="light"] .mensagem.aluno {
+    background-color: rgba(0, 119, 179, 0.1);
+    border: 1px solid var(--light-accent-primary);
+}
+[data-theme="light"] .mensagem.aluno strong {
+    color: var(--light-accent-primary);
+}
+[data-theme="light"] .mensagem.aluno small {
+    color: rgba(0, 119, 179, 0.8);
+}
+
+[data-theme="light"] .chat-box hr {
+    border-top: 1px dashed var(--light-border-light);
 }
 
 [data-theme="light"] .form-mensagem {
     border-top: 1px solid var(--light-border-light);
 }
 
-[data-theme="light"] .form-mensagem textarea {
+[data-theme="light"] .form-mensagem input[type="text"] {
     border: 1px solid var(--light-accent-primary);
     background: var(--light-card-bg);
     color: var(--light-primary-text-color);
     box-shadow: 0 0 8px rgba(0, 119, 179, 0.1);
 }
 
-[data-theme="light"] .form-mensagem textarea:focus {
+[data-theme="light"] .form-mensagem input[type="text"]:focus {
     border-color: var(--light-accent-secondary);
     box-shadow: 0 0 12px var(--light-accent-secondary);
 }
@@ -328,86 +586,127 @@
     box-shadow: 0 0 20px var(--light-accent-primary);
 }
 
+
 @media (max-width: 992px) {
-    .mensagens-container {
-        flex-direction: column;
-        height: auto;
-        min-height: calc(100vh - 180px);
+    .main-content {
+        padding: 25px;
     }
-    .lista-alunos {
-        flex: none;
-        width: 100%;
-        max-height: 250px;
-        border-right: none;
-        border-bottom: 1px solid var(--border-light);
-    }
-    .lista-alunos ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-    .lista-alunos li {
-        margin-bottom: 0;
-        flex: 1 1 auto;
-        max-width: 200px;
-    }
-    .lista-alunos a {
-        text-align: center;
-        padding: 10px 12px;
-    }
-    .chat-area {
+    .aluno-select {
         padding: 15px;
+        margin-bottom: 25px;
+    }
+    .aluno-select select {
+        padding: 12px 16px;
+        font-size: 1rem;
+        background-position: right 14px center;
+        background-size: 16px auto;
+    }
+    .chat-box {
+        padding: 15px;
+        max-height: 400px;
     }
     .mensagem {
-        max-width: 85%;
-        padding: 10px 15px;
+        padding: 8px 12px;
         font-size: 0.9rem;
+    }
+    .mensagem.professor {
+        margin-left: 15%;
+    }
+    .mensagem.aluno {
+        margin-right: 15%;
     }
     .form-mensagem {
         flex-direction: column;
         gap: 10px;
+        padding-top: 10px;
+    }
+    .form-mensagem input[type="text"] {
+        padding: 10px 12px;
+        font-size: 0.95rem;
     }
     .form-mensagem button {
-        width: 100%;
         padding: 10px;
+        font-size: 0.95rem;
+    }
+    #toggle-theme {
+        padding: 9px 20px;
+        font-size: 0.95rem;
     }
 }
 
 @media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+        padding-top: 30px;
+        padding-bottom: 10px;
+        box-shadow: 0 2px 10px var(--shadow-medium);
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+        animation: fadeInDown 0.5s ease-out;
+    }
+    @keyframes fadeInDown {
+        from { transform: translateY(-100%); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    .sidebar h2 {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+    }
+    .sidebar nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+    .sidebar a {
+        flex-grow: 1;
+        text-align: center;
+        margin: 5px;
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
     .main-content {
-        padding: 15px;
+        margin-left: 0;
+        padding: 20px;
+        width: 100%;
+        min-height: auto;
+        overflow-y: unset;
     }
-    .mensagens-container {
-        gap: 15px;
+    .main-content > h1 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
     }
-    .lista-alunos {
-        padding: 15px;
+    .aluno-select {
+        margin-bottom: 20px;
     }
-    .lista-alunos h3 {
-        font-size: 1.3rem;
-        margin-bottom: 15px;
-    }
-    .lista-alunos a {
-        font-size: 0.9rem;
-    }
-    .chat-area {
-        padding: 10px;
+    .chat-box {
+        max-height: 350px;
     }
     .mensagem {
-        padding: 8px 12px;
+        padding: 7px 10px;
         font-size: 0.85rem;
+        margin-bottom: 10px;
     }
-    .mensagem span {
-        font-size: 0.7em;
+    .mensagem.professor {
+        margin-left: 10%;
     }
-    .form-mensagem textarea {
-        padding: 10px 12px;
+    .mensagem.aluno {
+        margin-right: 10%;
+    }
+    .form-mensagem input[type="text"] {
+        padding: 9px 10px;
         font-size: 0.9rem;
-        min-height: 40px;
     }
     .form-mensagem button {
-        padding: 10px;
+        padding: 9px;
+        font-size: 0.9rem;
+    }
+    #toggle-theme {
+        top: 15px;
+        right: 15px;
+        padding: 9px 18px;
         font-size: 0.9rem;
     }
 }
@@ -416,39 +715,63 @@
     .main-content {
         padding: 10px;
     }
-    .mensagens-container {
-        gap: 10px;
+    .main-content > h1 {
+        font-size: 1.6rem;
+        margin-bottom: 15px;
     }
-    .lista-alunos {
+    .aluno-select {
         padding: 10px;
-        max-height: 200px;
-    }
-    .lista-alunos h3 {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-    }
-    .lista-alunos a {
-        font-size: 0.8rem;
-        padding: 8px 10px;
-    }
-    .chat-area .aviso {
-        font-size: 1rem;
-        padding: 15px;
-    }
-    .mensagens {
         gap: 10px;
+    }
+    .aluno-select label {
+        font-size: 0.95rem;
+    }
+    .aluno-select select {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        background-position: right 10px center;
+        background-size: 14px auto;
+    }
+    .chat-box {
+        padding: 10px;
+        max-height: 300px;
     }
     .mensagem {
-        padding: 6px 10px;
         font-size: 0.8rem;
+        margin-bottom: 8px;
+        padding: 6px 9px;
     }
-    .mensagem span {
-        font-size: 0.65em;
+    .mensagem strong {
+        font-size: 0.85rem;
     }
-    .form-mensagem textarea {
+    .mensagem small {
+        font-size: 0.65rem;
+    }
+    .mensagem.professor {
+        margin-left: 5%;
+    }
+    .mensagem.aluno {
+        margin-right: 5%;
+    }
+    .chat-box hr {
+        margin: 10px 0;
+    }
+    .form-mensagem {
+        gap: 8px;
+        padding-top: 10px;
+    }
+    .form-mensagem input[type="text"] {
+        padding: 8px 10px;
         font-size: 0.85rem;
     }
     .form-mensagem button {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+    #toggle-theme {
+        top: 10px;
+        right: 10px;
+        padding: 8px 16px;
         font-size: 0.85rem;
     }
 }
