@@ -29,6 +29,9 @@ while ($row = $result->fetch_assoc()) {
     <link rel="stylesheet" href="../../css/ficha-aluno.css">
 </head>
 <body>
+
+        <button id="toggle-theme">🌙 Modo Claro</button>
+
     <div class="sidebar">
         <h2>TopFit</h2>
         <a href="dashboard.php">🏠 Início</a>
@@ -74,5 +77,41 @@ while ($row = $result->fetch_assoc()) {
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
+
+        <script>
+    const toggleButton = document.getElementById('toggle-theme');
+    const htmlElement = document.documentElement; 
+
+    function applyTheme(theme) {
+        htmlElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme); 
+
+        if (theme === 'light') {
+            toggleButton.textContent = '🌑 Modo Escuro'; 
+        } else {
+            toggleButton.textContent = '🌙 Modo Claro'; 
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme');
+
+        if (savedTheme) {
+            
+            applyTheme(savedTheme);
+        } else {
+
+            const initialTheme = htmlElement.getAttribute('data-theme') || 'dark'; // Pega o tema do HTML ou 'dark' como fallback
+            applyTheme(initialTheme);
+        }
+
+        toggleButton.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = (currentTheme === 'dark') ? 'light' : 'dark';
+            applyTheme(newTheme); 
+        });
+    });
+</script>
+
 </body>
 </html>

@@ -13,6 +13,9 @@ verificarLogin("aluno");
     <link rel="stylesheet" href="../../css/presencas-aluno.css">
 </head>
 <body>
+
+        <button id="toggle-theme">🌙 Modo Claro</button>
+
     <div class="sidebar">
         <h2>TopFit</h2>
         <a href="dashboard.php">🏠 Início</a>
@@ -33,7 +36,7 @@ verificarLogin("aluno");
             <h4>Informação</h4>
             <p>As presenças são registradas automaticamente ao passar pela catraca da academia. Qualquer dúvida, procure um professor.</p>
         </div>
-
+        
         <div class="tabela-presencas">
             <table>
                 <thead>
@@ -64,5 +67,41 @@ verificarLogin("aluno");
             </table>
         </div>
     </div>
+
+    <script>
+    const toggleButton = document.getElementById('toggle-theme');
+    const htmlElement = document.documentElement; 
+
+    function applyTheme(theme) {
+        htmlElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme); 
+
+        if (theme === 'light') {
+            toggleButton.textContent = '🌑 Modo Escuro'; 
+        } else {
+            toggleButton.textContent = '🌙 Modo Claro'; 
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme');
+
+        if (savedTheme) {
+            
+            applyTheme(savedTheme);
+        } else {
+
+            const initialTheme = htmlElement.getAttribute('data-theme') || 'dark'; // Pega o tema do HTML ou 'dark' como fallback
+            applyTheme(initialTheme);
+        }
+
+        toggleButton.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = (currentTheme === 'dark') ? 'light' : 'dark';
+            applyTheme(newTheme); 
+        });
+    });
+</script>
+
 </body>
 </html>
