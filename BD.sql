@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30/05/2025 às 01:32
+-- Tempo de geração: 30/05/2025 às 20:00
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -53,7 +53,8 @@ CREATE TABLE `fichas` (
   `series` int(11) NOT NULL,
   `repeticoes` varchar(20) NOT NULL,
   `descanso` varchar(20) NOT NULL,
-  `criado_em` timestamp NOT NULL DEFAULT current_timestamp()
+  `criado_em` timestamp NOT NULL DEFAULT current_timestamp(),
+  `criado_por` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -68,7 +69,8 @@ CREATE TABLE `mensagens` (
   `professor_id` int(11) NOT NULL,
   `mensagem` text NOT NULL,
   `remetente` enum('aluno','professor') NOT NULL,
-  `enviado_em` timestamp NOT NULL DEFAULT current_timestamp()
+  `enviado_em` timestamp NOT NULL DEFAULT current_timestamp(),
+  `lida` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -106,7 +108,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `tipo`, `criado_em`) VALUES
-(1, 'Guilherme', 'gpiloto35@gmail.com', '$2y$10$RlhOaRRDSBmrWe4G8VdtNuOfzQocNgOQq6OtSEMxqTtj4GTkeamGq', 'aluno', '2025-05-29 13:37:20');
+(1, 'Guilherme', 'gpiloto35@gmail.com', '$2y$10$RlhOaRRDSBmrWe4G8VdtNuOfzQocNgOQq6OtSEMxqTtj4GTkeamGq', 'aluno', '2025-05-29 13:37:20'),
+(5, 'João Professor', 'professor@topfit.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'professor', '2025-05-30 17:23:27');
 
 --
 -- Índices para tabelas despejadas
@@ -181,7 +184,7 @@ ALTER TABLE `presencas`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restrições para tabelas despejadas
