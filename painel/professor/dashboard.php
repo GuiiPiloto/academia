@@ -50,7 +50,7 @@ $mensagens_nao_lidas = $mensagens_result['mensagens_nao_lidas'];
 
     <div class="main-content">
         <div class="dashboard-header">
-            Bem-vindo, Professor <?php echo htmlspecialchars($nome_professor); ?>!
+            Bem-vindo, <?php echo htmlspecialchars($nome_professor); ?>!
         </div>
         
         <div class="cards">
