@@ -1,0 +1,616 @@
+:root {
+    --base-bg-dark: #080808;
+    --base-bg-light: #f0f0f0;
+    --base-text-dark: #e0e0e0;
+    --base-text-light: #1a1a1a;
+    --base-primary-neon: #00ffff; /* Ciano Neon */
+    --base-secondary-neon: #ff00cc; /* Roxo Neon */
+
+    --main-bg: var(--base-bg-dark);
+    --primary-text-color: var(--base-text-dark);
+    --secondary-text-color: #a0a0a0;
+    --panel-bg: #151515; /* Fundo do sidebar e seções */
+    --card-bg: #222222; /* Fundo de cards e formulários */
+
+    --border-light: rgba(0, 255, 255, 0.2); /* Borda mais sutil (ciano) */
+    --border-medium: rgba(0, 255, 255, 0.35); /* Borda média (ciano) */
+    --shadow-light: 0 0 8px rgba(0, 255, 255, 0.3); /* Sombra mais discreta (ciano) */
+    --shadow-medium: 0 0 15px rgba(0, 255, 255, 0.45); /* Sombra com bom destaque (ciano) */
+    --shadow-strong: 0 0 25px rgba(0, 255, 255, 0.6); /* Sombra para destaque forte (ciano) */
+
+    --accent-primary: var(--base-primary-neon); /* Ciano para títulos, botões principais */
+    --accent-secondary: var(--base-secondary-neon); /* Roxo para cards de navegação/links ativos */
+
+    --button-toggle-bg: transparent;
+    --button-toggle-border: var(--accent-primary);
+    --button-toggle-color: var(--accent-primary);
+    --button-toggle-hover-bg: var(--accent-primary);
+    --button-toggle-hover-color: var(--base-bg-dark);
+    --button-toggle-shadow: var(--shadow-light);
+
+    --nav-card-border: var(--accent-secondary); /* Borda dos links da sidebar (roxo) */
+    --nav-card-text: var(--secondary-text-color); /* Cor normal do texto dos links da sidebar */
+    --nav-card-active-text: var(--base-bg-dark); /* Cor do texto do link ativo (preto no dark, branco no light) */
+    --nav-card-hover-bg: rgba(255, 0, 204, 0.1); /* Fundo sutil de hover (roxo) */
+    --nav-card-active-bg: var(--accent-secondary); /* Fundo do link ativo (roxo forte) */
+    --nav-card-shadow: 0 0 10px rgba(255, 0, 204, 0.6); /* Sombra normal dos cards/links (roxo) */
+    --nav-card-active-shadow: 0 0 25px rgba(255, 0, 204, 0.8); /* Sombra de destaque para o ativo (roxo) */
+
+    --info-box-bg: var(--card-bg);
+    --info-box-border: var(--border-light);
+    --info-box-shadow: var(--shadow-light);
+    --info-box-text-color: var(--primary-text-color);
+    --info-box-title-color: var(--accent-primary);
+
+    --status-presente: #00ff88; /* Verde para presente */
+    --status-falta: #ff4d4d; /* Vermelho para falta */
+    --status-text-dark: #000;
+}
+
+[data-theme="light"] {
+    --main-bg: var(--base-bg-light);
+    --primary-text-color: var(--base-text-light);
+    --secondary-text-color: #777;
+    --panel-bg: #ffffff;
+    --card-bg: #f8f8f8;
+
+    --border-light: rgba(0, 119, 179, 0.15);
+    --border-medium: rgba(0, 119, 179, 0.25);
+    --shadow-light: 0 0 8px rgba(0, 119, 179, 0.1);
+    --shadow-medium: 0 0 15px rgba(0, 119, 179, 0.15);
+    --shadow-strong: 0 0 25px rgba(0, 119, 179, 0.2);
+
+    --accent-primary: #0077b3; /* Azul para light theme */
+    --accent-secondary: #a00080; /* Roxo mais escuro para light theme */
+
+    --button-toggle-border: var(--accent-primary);
+    --button-toggle-color: var(--accent-primary);
+    --button-toggle-hover-bg: var(--accent-primary);
+    --button-toggle-hover-color: var(--base-bg-light);
+    --button-toggle-shadow: var(--shadow-light);
+
+    --nav-card-border: rgba(160, 0, 128, 0.5);
+    --nav-card-text: #000000;
+    --nav-card-active-text: var(--base-bg-light);
+    --nav-card-hover-bg: rgba(160, 0, 128, 0.08);
+    --nav-card-active-bg: var(--accent-secondary);
+    --nav-card-shadow: 0 0 12px rgba(160, 0, 128, 0.4);
+    --nav-card-active-shadow: 0 0 20px rgba(160, 0, 128, 0.6);
+
+    --info-box-bg: var(--card-bg);
+    --info-box-border: var(--border-light);
+    --info-box-shadow: var(--shadow-light);
+    --info-box-text-color: var(--primary-text-color);
+    --info-box-title-color: var(--accent-primary);
+
+    --status-presente: #00a854;
+    --status-falta: #cc3333;
+    --status-text-dark: #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    background-color: var(--main-bg);
+    color: var(--primary-text-color);
+    display: flex;
+    transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
+    overflow: hidden; /* Controla o overflow globalmente, main-content terá rolagem */
+}
+
+.sidebar {
+    width: 250px;
+    background: var(--panel-bg);
+    padding: 20px;
+    padding-top: 50px;
+    position: fixed;
+    height: 100vh;
+    box-shadow: 3px 0 15px var(--shadow-medium);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    border-right: 1px solid var(--border-light);
+    animation: slideInLeft 0.5s ease-out;
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.sidebar h2 {
+    color: var(--accent-primary);
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 900;
+    text-shadow: 0 0 8px var(--accent-primary), 0 0 15px rgba(0, 255, 255, 0.4);
+    letter-spacing: 1.5px;
+}
+
+.sidebar nav {
+    flex-grow: 1;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+    text-decoration: none;
+    color: var(--secondary-text-color);
+    padding: 12px 15px;
+    border-radius: 10px;
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.sidebar a:hover {
+    background: rgba(0, 255, 255, 0.1);
+    color: var(--primary-text-color);
+    box-shadow: var(--shadow-light);
+    transform: translateX(8px) scale(1.02);
+}
+
+.sidebar a.active {
+    background: var(--accent-primary);
+    color: var(--base-bg-dark);
+    font-weight: 700;
+    box-shadow: var(--shadow-strong);
+    transform: translateX(0) scale(1);
+    border: 1px solid rgba(0, 255, 255, 0.8);
+}
+
+.main-content {
+    margin-left: 250px;
+    flex-grow: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.8s ease-out;
+    width: calc(100% - 250px);
+    height: 100vh;
+    overflow-y: auto;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.dashboard-header {
+font-size: 1.4rem; 
+margin-bottom: 20px; 
+color: var(--accent-secondary); 
+font-weight: 600;
+text-shadow: 0 0 5px var(--accent-secondary), 0 0 10px rgba(255, 0, 204, 0.6); 
+text-align: center;
+letter-spacing: 0.3px; 
+opacity: 0.9; 
+max-width: 600px;
+}
+
+.alunos {
+    width: 100%;
+    max-width: 450px;
+    margin-bottom: 30px; /* Um pouco mais de espaço abaixo do select */
+}
+
+.alunos form {
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 12px; /* Bordas mais suaves */
+    box-shadow: 0 0 15px rgba(255, 0, 204, 0.3); /* Sombra roxa para o container do select */
+    border: 1px solid var(--accent-secondary); /* Borda roxa para o container */
+}
+
+/* ESTILO APRIMORADO PARA O SELECT */
+select {
+    width: 100%;
+    background: var(--panel-bg); /* Fundo do panel */
+    color: var(--primary-text-color);
+    padding: 12px 15px; /* Mais padding para um visual mais "cheio" */
+    border: 1px solid var(--accent-secondary); /* Borda roxa, mais visível */
+    border-radius: 8px; /* Bordas suaves */
+    font-size: 1rem; /* Tamanho da fonte legível */
+    box-shadow: 0 0 8px rgba(255, 0, 204, 0.2); /* Sombra roxa sutil */
+    transition: all 0.3s ease;
+    -webkit-appearance: none; /* Remove a seta padrão do Chrome */
+    -moz-appearance: none;    /* Remove a seta padrão do Firefox */
+    appearance: none;         /* Remove a seta padrão */
+    /* Seta SVG personalizada (roxo para contrastar bem) */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FF00CC%22%20d%3D%22M287%2C197.8l-133.4%2C133.4c-2.7%2C2.7-6.2%2C4-9.7%2C4s-7-1.3-9.7-4L5.4%2C197.8c-7.2-7.2-7.2-18.8%2C0-26s18.8-7.2%2C26%2C0l104.9%2C104.9L256.3%2C171.8c7.2-7.2%2C18.8-7.2%2C26%2C0S294.2%2C190.6%2C287%2C197.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 15px center; /* Posição da seta, mais para dentro */
+    background-size: 16px auto; /* Tamanho da seta */
+    cursor: pointer;
+    text-indent: 0.01px; /* Para ajudar a alinhar o texto em alguns navegadores */
+    text-overflow: ''; /* Remove ellipsis em alguns casos */
+    line-height: 1.4; /* Ajusta a altura da linha para centralizar o texto */
+}
+
+select:hover {
+    border-color: var(--accent-secondary); /* Borda mais forte no hover */
+    box-shadow: 0 0 15px rgba(255, 0, 204, 0.4); /* Sombra roxa mais intensa no hover */
+    transform: translateY(-1px);
+}
+select:focus {
+    outline: none;
+    border-color: var(--accent-primary); /* Ciano no focus para um destaque diferente */
+    box-shadow: 0 0 18px var(--accent-primary); /* Sombra ciano forte no focus */
+}
+
+/* Estilo para as opções dentro do select (não é totalmente controlável via CSS) */
+select option {
+    background-color: var(--panel-bg); /* Fundo das opções */
+    color: var(--primary-text-color); /* Cor do texto das opções */
+    padding: 8px; /* Adiciona padding às opções */
+}
+/* A cor da opção selecionada dependerá do browser e OS, mas tentamos dar um background */
+select option:checked {
+    background-color: var(--accent-secondary); /* Roxo para a opção selecionada */
+    color: var(--base-bg-dark);
+}
+
+
+.main-content h2 { /* Título da ficha de treino (ex: Ficha de Treino - Aluno: [Nome do Aluno]) */
+    font-size: 1.8rem;
+    color: var(--accent-secondary);
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px var(--accent-secondary), 0 0 10px rgba(255, 0, 204, 0.4);
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+form {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-medium);
+    margin-bottom: 20px;
+    border: 1px solid var(--border-medium);
+    width: 100%;
+    max-width: 500px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--primary-text-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 9px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    background: var(--panel-bg);
+    color: var(--primary-text-color);
+    font-size: 0.9rem;
+    box-shadow: 0 0 5px var(--shadow-light);
+    transition: all 0.3s ease;
+}
+textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 10px var(--accent-primary);
+}
+
+input[type="text"]:hover,
+input[type="number"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover,
+textarea:hover {
+    background: var(--panel-bg);
+    box-shadow: 0 0 8px var(--shadow-medium);
+    border-color: var(--accent-primary);
+}
+
+button[type="submit"],
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: var(--accent-primary);
+    color: var(--base-bg-dark);
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 0 6px var(--accent-primary);
+    text-shadow: 0 0 2px rgba(0,0,0,0.1);
+}
+
+button[type="submit"]:hover,
+.btn-primary:hover {
+    background: var(--accent-primary);
+    box-shadow: 0 0 12px var(--accent-primary);
+    transform: translateY(-2px) scale(1.005);
+}
+
+button[type="submit"]:active,
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 0 6px var(--accent-primary);
+}
+
+#toggle-theme {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    padding: 10px 22px;
+    background: var(--button-toggle-bg);
+    border: 2px solid var(--button-toggle-border);
+    color: var(--button-toggle-color);
+    font-weight: 700;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1001;
+    box-shadow: var(--button-toggle-shadow);
+    letter-spacing: 0.5px;
+    font-size: 1rem;
+}
+#toggle-theme:hover {
+    background: var(--button-toggle-hover-bg);
+    color: var(--button-toggle-hover-color);
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-3px) scale(1.02);
+}
+#toggle-theme:active {
+    transform: translateY(0);
+}
+
+
+/* Media Queries */
+@media (max-width: 992px) {
+    .sidebar {
+        width: 220px;
+        padding-top: 40px;
+    }
+    .sidebar h2 {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+    }
+    .sidebar a {
+        font-size: 1rem;
+        padding: 10px 12px;
+        margin: 15px 0;
+    }
+    .main-content {
+        margin-left: 220px;
+        padding: 25px;
+        width: calc(100% - 220px);
+    }
+    .dashboard-header {
+        font-size: 1.6rem; /* Ajustado */
+        margin-bottom: 20px; /* Ajustado */
+    }
+    .alunos {
+        max-width: 400px;
+        margin-bottom: 25px; /* Ajustado */
+    }
+    .alunos form {
+        padding: 12px;
+    }
+    select {
+        padding: 10px 12px; /* Ajustado */
+        font-size: 0.95rem; /* Ajustado */
+        background-position: right 10px center; /* Ajustado */
+        background-size: 14px auto; /* Ajustado */
+    }
+    .main-content h2 {
+        font-size: 1.6rem;
+        margin-bottom: 18px;
+    }
+    form {
+        padding: 18px;
+        max-width: 450px;
+    }
+    label {
+        font-size: 0.9rem;
+        margin-bottom: 7px;
+    }
+    input[type="text"], input[type="number"], textarea {
+        padding: 8px;
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+    }
+    textarea {
+        min-height: 55px;
+    }
+    button[type="submit"] {
+        padding: 11px;
+        font-size: 0.95rem;
+    }
+    #toggle-theme {
+        padding: 9px 20px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+        padding-top: 30px;
+        padding-bottom: 10px;
+        box-shadow: 0 2px 10px var(--shadow-medium);
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+        animation: fadeInDown 0.5s ease-out;
+    }
+    @keyframes fadeInDown {
+        from { transform: translateY(-100%); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    .sidebar h2 {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+    }
+    .sidebar nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+    .sidebar a {
+        flex-grow: 1;
+        text-align: center;
+        margin: 5px;
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+        width: 100%;
+        min-height: auto;
+        overflow-y: unset;
+    }
+    .dashboard-header {
+        font-size: 1.4rem; /* Ajustado */
+        margin-bottom: 18px; /* Ajustado */
+    }
+    .alunos {
+        max-width: 90%; /* Ajustado */
+        margin-bottom: 20px; /* Ajustado */
+    }
+    .alunos form {
+        padding: 10px; /* Ajustado */
+    }
+    select {
+        padding: 8px 10px; /* Ajustado */
+        font-size: 0.9rem; /* Ajustado */
+        background-position: right 8px center; /* Ajustado */
+        background-size: 12px auto; /* Ajustado */
+    }
+    .main-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+    form {
+        padding: 15px;
+        max-width: 90%;
+    }
+    label {
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+    }
+    input[type="text"], input[type="number"], textarea {
+        padding: 7px;
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+    textarea {
+        min-height: 50px;
+    }
+    button[type="submit"] {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    #toggle-theme {
+        top: 15px;
+        right: 15px;
+        padding: 9px 18px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-header {
+        font-size: 1.2rem; /* Ajustado */
+        margin-bottom: 12px; /* Ajustado */
+        letter-spacing: 0.5px;
+    }
+    .sidebar h2 {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+    .sidebar nav {
+        gap: 5px;
+    }
+    .sidebar a {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+        margin: 3px;
+    }
+    .alunos {
+        max-width: 95%;
+        margin-bottom: 15px;
+    }
+    .alunos form {
+        padding: 10px;
+    }
+    select {
+        font-size: 0.8rem;
+        padding: 6px 8px; /* Ajustado */
+        background-position: right 6px center; /* Ajustado */
+        background-size: 10px auto; /* Ajustado */
+    }
+    .main-content h2 {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+    }
+    form {
+        padding: 12px;
+        max-width: 95%;
+    }
+    label {
+        font-size: 0.8rem;
+        margin-bottom: 5px;
+    }
+    input[type="text"], input[type="number"], textarea {
+        padding: 6px;
+        font-size: 0.75rem;
+        margin-bottom: 8px;
+    }
+    textarea {
+        min-height: 45px;
+    }
+    button[type="submit"] {
+        padding: 9px;
+        font-size: 0.85rem;
+    }
+    #toggle-theme {
+        top: 10px;
+        right: 10px;
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+}
