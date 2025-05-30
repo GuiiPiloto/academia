@@ -2,17 +2,16 @@
 function verificarLogin($tipoEsperado) {
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
-}
+    }
 
     // Verifica se o usuário está logado
-    if (!isset($_SESSION["usuario_id"])) {
-        header("Location: ../login.php");
+    if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['tipo'])) {
+        header("Location: ../../login.php");
         exit;
     }
 
-    // Verifica se o tipo de usuário é o esperado (admin, professor, aluno)
+    // Se o tipo de usuário não for o esperado, redireciona para o painel correto
     if ($_SESSION["tipo"] !== $tipoEsperado) {
-        // Redireciona para o painel correspondente ao tipo correto
         switch ($_SESSION["tipo"]) {
             case "admin":
                 header("Location: ../admin/dashboard.php");
@@ -24,7 +23,7 @@ function verificarLogin($tipoEsperado) {
                 header("Location: ../aluno/dashboard.php");
                 break;
             default:
-                header("Location: ../login.php");
+                header("Location: ../../login.php");
                 break;
         }
         exit;

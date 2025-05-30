@@ -49,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mensagem'], $_POST['p
 <html lang="pt-br" data-theme="dark">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="assets/img/icone.png" type="image/png"> 
     <title>Mensagens - TopFit</title>
     <link rel="stylesheet" href="../../css/mensagens-aluno.css">
 </head>
@@ -60,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mensagem'], $_POST['p
     <a href="ficha.php">💪 Ficha de Treino</a>
     <a href="avaliacoes.php">📊 Avaliações</a>
     <a href="mensagens.php" class="active">💬 Mensagens</a>
-    <a href="../../logout.php">🚪 Sair</a>
+    <a href="../../index.php">🚪 Sair</a>
 </div>
 
 <div class="main-content">

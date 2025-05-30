@@ -30,7 +30,7 @@ $resultado = $stmt->get_result();
         <a href="ficha.php">💪 Ficha de Treino</a>
         <a href="avaliacoes.php" class="active">📊 Avaliações</a>
         <a href="mensagens.php">💬 Mensagens</a>
-        <a href="../../logout.php">🚪 Sair</a>
+        <a href="../../index.php">🚪 Sair</a>
     </div>
 
     <div class="main-content">
