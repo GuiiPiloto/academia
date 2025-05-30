@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mensagem'], $_POST['p
 <html lang="pt-br" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="assets/img/icone.png" type="image/png"> 
+    <link rel="icon" href="/academia/assets/img/icone.png" type="image/png">
     <title>Mensagens - TopFit</title>
     <link rel="stylesheet" href="../../css/mensagens-aluno.css">
 </head>

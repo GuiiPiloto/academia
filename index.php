@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/index.css">
     <meta name="description" content="Sistema completo de gestão para academias. Gerencie alunos, treinos, presenças e avaliações físicas com facilidade.">
-    <link rel="icon" type="image/png" href="assets/img/ico.png">
+    <link rel="icon" href="./assets/img/icone.png" type="image/png">
 </head>
 <body>
     <button id="toggle-theme">🌙 Modo Claro</button>

@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <title>Cadastrar - TopFit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="assets/img/ico.png">
+    <link rel="icon" href="./assets/img/icone.png" type="image/png">
     <link rel="stylesheet" href="css/cadastrar.css">
 </head>
 <body>
