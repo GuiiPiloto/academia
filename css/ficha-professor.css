@@ -436,7 +436,6 @@ button[type="submit"]:active {
     z-index: 1001;
     box-shadow: var(--button-toggle-shadow);
     letter-spacing: 0.5px;
-    font-size: 1rem;
 }
 #toggle-theme:hover {
     background: var(--button-toggle-hover-bg);

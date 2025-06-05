@@ -21,8 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["aluno_id"])) {
     $massa = $_POST["massa_magra"];
     $obs = $_POST["observacoes"];
 
-    $stmt = $conn->prepare("INSERT INTO avaliacoes_fisicas (aluno_id, data_avaliacao, peso, altura, percentual_gordura, massa_magra, observacoes, criado_em) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
-    $stmt->bind_param("issdddds", $aluno_id, $data, $peso, $altura, $gordura, $massa, $obs);
+    $stmt = $conn->prepare("INSERT INTO avaliacoes (aluno_id, data_avaliacao, peso, altura, percentual_gordura, massa_magra, observacoes, criado_em) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+    $stmt->bind_param("isdddds", $aluno_id, $data, $peso, $altura, $gordura, $massa, $obs);
     if ($stmt->execute()) {
         $mensagem = "✅ Avaliação registrada com sucesso!";
     } else {
