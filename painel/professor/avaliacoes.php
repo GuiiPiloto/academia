@@ -4,39 +4,62 @@ require_once "../../config/conexao.php";
 verificarLogin("professor");
 
 $alunos = [];
-$stmt = $conn->prepare("SELECT id, nome FROM usuarios WHERE tipo = 'aluno' ORDER BY nome");
-$stmt->execute();
+$query = "SELECT id, nome FROM usuarios WHERE tipo = 'aluno' ORDER BY nome";
+$stmt = $conn->prepare($query);
+
+if (!$stmt) {
+    die("Erro na preparação da consulta de alunos: " . $conn->error);
+}
+
+if (!$stmt->execute()) {
+    die("Erro na execução da consulta de alunos: " . $stmt->error);
+}
+
 $result = $stmt->get_result();
 while ($row = $result->fetch_assoc()) {
     $alunos[] = $row;
 }
 
 $mensagem = "";
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["aluno_id"])) {
-    $aluno_id = $_POST["aluno_id"];
-    $data = $_POST["data"];
-    $peso = $_POST["peso"];
-    $altura = $_POST["altura"];
-    $gordura = $_POST["percentual_gordura"];
-    $massa = $_POST["massa_magra"];
-    $obs = $_POST["observacoes"];
 
-    $stmt = $conn->prepare("INSERT INTO avaliacoes (aluno_id, data_avaliacao, peso, altura, percentual_gordura, massa_magra, observacoes, criado_em) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
-    $stmt->bind_param("isdddds", $aluno_id, $data, $peso, $altura, $gordura, $massa, $obs);
-    if ($stmt->execute()) {
-        $mensagem = "✅ Avaliação registrada com sucesso!";
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["aluno_id"])) {
+    $aluno_id = filter_input(INPUT_POST, "aluno_id", FILTER_VALIDATE_INT);
+    $data = $_POST["data"];
+    $peso = filter_input(INPUT_POST, "peso", FILTER_VALIDATE_FLOAT);
+    $altura = filter_input(INPUT_POST, "altura", FILTER_VALIDATE_FLOAT);
+    $gordura = filter_input(INPUT_POST, "percentual_gordura", FILTER_VALIDATE_FLOAT);
+    $massa = filter_input(INPUT_POST, "massa_magra", FILTER_VALIDATE_FLOAT);
+    $obs = trim($_POST["observacoes"]);
+
+    if ($aluno_id && $data && $peso !== false && $altura !== false && $gordura !== false && $massa !== false) {
+        $stmt = $conn->prepare("INSERT INTO avaliacoes (aluno_id, data_avaliacao, peso, altura, percentual_gordura, massa_magra, observacoes, criado_em) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+        if ($stmt) {
+            $stmt->bind_param("isdddds", $aluno_id, $data, $peso, $altura, $gordura, $massa, $obs);
+            if ($stmt->execute()) {
+                $mensagem = "✅ Avaliação registrada com sucesso!";
+            } else {
+                $mensagem = "❌ Erro ao salvar avaliação.";
+            }
+        } else {
+            $mensagem = "❌ Erro na preparação da consulta.";
+        }
     } else {
-        $mensagem = "❌ Erro ao salvar avaliação.";
+        $mensagem = "❌ Dados inválidos. Verifique os campos.";
     }
 }
 
 $avaliacoes = [];
-$alunoSelecionado = $_GET["aluno_id"] ?? null;
+$alunoSelecionado = filter_input(INPUT_GET, "aluno_id", FILTER_VALIDATE_INT);
 if ($alunoSelecionado) {
     $stmt = $conn->prepare("SELECT * FROM avaliacoes WHERE aluno_id = ? ORDER BY data_avaliacao DESC");
-    $stmt->bind_param("i", $alunoSelecionado);
-    $stmt->execute();
-    $avaliacoes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    if ($stmt) {
+        $stmt->bind_param("i", $alunoSelecionado);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result) {
+            $avaliacoes = $result->fetch_all(MYSQLI_ASSOC);
+        }
+    }
 }
 ?>
 
