@@ -1,42 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap');
+
 :root {
-    --base-bg-dark: #080808;
-    --base-bg-light: #f0f0f0;
-    --base-text-dark: #e0e0e0;
-    --base-text-light: #1a1a1a;
-    --base-primary-neon: #00ffff;
-    --base-secondary-neon: #ff00cc;
-
-    --main-bg: var(--base-bg-dark);
-    --primary-text-color: var(--base-text-dark);
-    --secondary-text-color: #a0a0a0;
-    --panel-bg: #151515;
-    --card-bg: #222222;
-
-    --border-light: rgba(0, 255, 255, 0.25);
-    --border-medium: rgba(0, 255, 255, 0.35);
-    --shadow-light: 0 0 8px rgba(0, 255, 255, 0.3);
-    --shadow-medium: 0 0 15px rgba(0, 255, 255, 0.45);
-    --shadow-strong: 0 0 25px rgba(0, 255, 255, 0.6);
-
-    --accent-primary: var(--base-primary-neon);
-    --accent-secondary: var(--base-secondary-neon);
+    --color-primary: #475569;
+    --color-text: #E5E7EB;
+    --color-text-secondary: #9CA3AF;
+    --color-background: #111827;
+    --color-panel: #1F2937;
+    --color-card: #1F2937;
+    --color-card-hover: #374151;
+    --color-border: #374151;
+    --color-button-text: #FFFFFF;
+    --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --border-radius-medium: 8px;
+    --border-radius-large: 12px;
+    --transition-smooth: all 0.2s ease-in-out;
 }
 
 [data-theme="light"] {
-    --main-bg: var(--base-bg-light);
-    --primary-text-color: var(--base-text-light);
-    --secondary-text-color: #6c757d;
-    --panel-bg: #ffffff;
-    --card-bg: #f8f9fa;
-
-    --border-light: rgba(0, 119, 179, 0.15);
-    --border-medium: rgba(0, 119, 179, 0.25);
-    --shadow-light: 0 0 8px rgba(0, 119, 179, 0.1);
-    --shadow-medium: 0 0 15px rgba(0, 119, 179, 0.15);
-    --shadow-strong: 0 0 25px rgba(0, 119, 179, 0.2);
-
-    --accent-primary: #0077b3;
-    --accent-secondary: #a00080;
+    --color-primary: #334155;
+    --color-text: #1F2937;
+    --color-text-secondary: #6B7280;
+    --color-background: #F9FAFB;
+    --color-panel: #FFFFFF;
+    --color-card: #FFFFFF;
+    --color-card-hover: #F3F4F6;
+    --color-border: #E5E7EB;
 }
 
 * {
@@ -53,7 +41,7 @@
 @keyframes slideUpFadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(15px);
     }
     to {
         opacity: 1;
@@ -62,36 +50,40 @@
 }
 
 body {
-    font-family: 'Segoe UI', 'Roboto', sans-serif;
-    background-color: var(--main-bg);
-    color: var(--primary-text-color);
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
     display: flex;
     min-height: 100vh;
     transition: background-color 0.4s ease-in-out;
     overflow-x: hidden;
+    line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
 }
 
 .sidebar {
-    width: 250px;
-    background: var(--panel-bg);
-    padding: 25px;
+    width: 220px;
+    background: var(--color-panel);
+    padding: 30px 20px;
     position: fixed;
-    height: 100%;
-    box-shadow: 3px 0 15px rgba(0,0,0,0.3);
+    height: 100vh;
+    box-shadow: var(--shadow-subtle);
     display: flex;
     flex-direction: column;
     z-index: 1000;
-    border-right: 1px solid var(--border-light);
+    border-right: 1px solid var(--color-border);
 }
 
 .sidebar h2 {
-    color: var(--accent-primary);
+    color: var(--color-primary);
     margin-bottom: 40px;
     text-align: center;
-    font-size: 2rem;
-    font-weight: 900;
-    text-shadow: 0 0 8px var(--accent-primary);
-    letter-spacing: 1.5px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-shadow: none;
 }
 
 .sidebar nav {
@@ -104,56 +96,71 @@ body {
     gap: 12px;
     margin: 18px 0;
     text-decoration: none;
-    color: var(--secondary-text-color);
-    padding: 12px 15px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
+    color: var(--color-text-secondary);
+    padding: 14px 20px;
+    border-radius: var(--border-radius-medium);
+    transition: var(--transition-smooth);
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .sidebar a:hover {
-    background: rgba(0, 255, 255, 0.1);
-    color: var(--accent-primary);
-    transform: translateX(8px);
+    background: var(--color-card-hover);
+    color: var(--color-text);
+    transform: none;
 }
 
 .sidebar a.active {
-    background: var(--accent-primary);
-    color: var(--base-bg-dark);
-    font-weight: 700;
-    box-shadow: 0 0 15px var(--accent-primary);
-    transform: translateX(0);
+    background: var(--color-primary);
+    color: var(--color-button-text);
+    font-weight: 600;
+    box-shadow: none;
+    transform: none;
 }
 
 [data-theme="light"] .sidebar a.active {
-    color: var(--base-bg-light);
+    color: var(--color-button-text);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--color-border);
+    }
 }
 
 .main-content {
-    margin-left: 250px;
+    margin-left: 220px;
     flex-grow: 1;
-    padding: 40px;
-    width: calc(100% - 250px);
+    padding: 50px;
+    width: calc(100% - 220px);
     animation: fadeIn 0.8s ease-out;
 }
 
 .dashboard-header {
-    text-align: center;
-    margin-bottom: 50px;
+    text-align: left;
+    margin-bottom: 60px;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 25px;
 }
 
 .dashboard-header h1 {
-    font-size: 2.8rem;
+    font-size: 2.4rem;
     font-weight: 700;
-    margin-bottom: 5px;
-    color: var(--primary-text-color);
+    margin-bottom: 8px;
+    color: var(--color-text);
 }
 
 .dashboard-header p {
-    font-size: 1.3rem;
-    color: var(--accent-primary);
-    text-shadow: 0 0 5px var(--accent-primary);
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    text-shadow: none;
 }
 
 .cards, .infos {
@@ -178,81 +185,88 @@ body {
 
 
 .card {
-    background: var(--panel-bg);
-    border: 2px solid var(--accent-secondary);
-    padding: 25px;
-    border-radius: 15px;
+    background: var(--color-panel);
+    border: 1px solid var(--color-border);
+    padding: 30px;
+    border-radius: var(--border-radius-large);
     text-decoration: none;
-    color: var(--primary-text-color);
-    transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(255, 0, 204, 0.3);
-    text-align: center;
+    color: var(--color-text);
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-subtle);
+    text-align: left;
 }
 
 .card:hover {
-    transform: translateY(-8px) scale(1.02);
-    background: var(--accent-secondary);
-    color: var(--base-bg-dark);
-    box-shadow: 0 0 25px rgba(255, 0, 204, 0.6);
+    transform: translateY(-5px);
+    border-color: var(--color-primary);
+    background: var(--color-panel);
+    color: var(--color-text);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 [data-theme="light"] .card:hover {
-    color: var(--base-bg-light);
+    color: var(--color-text);
 }
 
 .card h3 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 10px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--color-button-text);
 }
 
 .card p {
     font-size: 1rem;
     font-weight: 400;
-    color: var(--secondary-text-color);
+    color: var(--color-text-secondary);
     transition: color 0.3s ease;
 }
 
 .card:hover p {
-    color: var(--base-bg-light);
+    color: var(--color-text-secondary);
 }
 
 .info-box {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-light);
-    border-radius: 15px;
-    padding: 25px;
-    text-align: center;
-    box-shadow: var(--shadow-light);
-    transition: all 0.3s ease;
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-large);
+    padding: 30px;
+    text-align: left;
+    box-shadow: none;
+    transition: var(--transition-smooth);
 }
 
 .info-box:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0 15px var(--shadow-medium);
+    box-shadow: var(--shadow-subtle);
 }
 
 .info-box h4 {
-    color: var(--secondary-text-color);
+    color: var(--color-text-secondary);
     font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .info-dado {
-    color: var(--accent-primary);
-    font-size: 3rem;
-    font-weight: 900;
+    color: var(--color-button-text);
+    font-size: 2.8rem;
+    font-weight: 700;
     line-height: 1.1;
-    text-shadow: 0 0 10px var(--accent-primary);
+    text-shadow: none;
 }
 
 .info-dado.small-text {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 700;
     padding-top: 1rem;
+}
+
+[data-theme="light"] .card h3,
+[data-theme="light"] .info-dado {
+    color: var(--color-primary);
 }
 
 #toggle-theme {
@@ -260,23 +274,25 @@ body {
     top: 25px;
     right: 25px;
     padding: 10px 22px;
-    background: transparent;
-    border: 2px solid var(--accent-primary);
-    color: var(--accent-primary);
-    font-weight: 700;
+    background: var(--color-panel);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-weight: 600;
     border-radius: 30px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition-smooth);
     z-index: 1001;
 }
 
 #toggle-theme:hover {
-    background: var(--accent-primary);
-    color: var(--base-bg-dark);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
 }
 
-[data-theme="light"] #toggle-theme:hover {
-    color: var(--base-bg-light);
+@media (min-width: 1200px) {
+    .cards, .infos {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
@@ -287,11 +303,12 @@ body {
         width: 100%;
         position: relative;
         height: auto;
-        border-bottom: 1px solid var(--border-light);
+        border-right: 0;
+        border-bottom: 1px solid var(--color-border);
     }
     .main-content {
         margin-left: 0;
-        padding: 25px;
+        padding: 30px;
         width: 100%;
     }
 }

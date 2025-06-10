@@ -27,7 +27,7 @@ $resultado = $stmt->get_result();
         <button id="toggle-theme">🌙 Modo Claro</button>
 
     <div class="sidebar">
-        <h2>TopFit</h2>
+        <h2>TOPFIT</h2>
         <a href="dashboard.php">🏠 Início</a>
         <a href="presencas.php">📅 Presenças</a>
         <a href="ficha.php">💪 Ficha de Treino</a>

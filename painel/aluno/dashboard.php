@@ -78,7 +78,8 @@ $foco_treino = $stmt_ficha->get_result()->fetch_assoc()['grupo_muscular'] ?? 'Ne
         <section class="infos">
             <div class="info-box">
                 <h4>📈 Presenças no Mês</h4>
-                <p class="info-dado"><?php echo $presencas_no_mes; ?></p>
+                <p class="info-dado">2</p>  <!-- FUTURAMENTE ADICIONAR A PRESENÇA NA CATRACA COLOCAR ESSE CÓDIGO
+                                            <p class="info-dado"><?php echo $presencas_no_mes;?></p> -->
             </div>
             <div class="info-box">
                 <h4>🎯 Foco do Treino</h4>
