@@ -1,0 +1,179 @@
+:root {
+    --bg-dark: #0f0f0f;
+    --bg-light: #f4f4f4;
+    --text-dark: #e0e0e0;
+    --text-light: #101010;
+    --neon: #00ffc3;
+    --neon-soft: rgba(0, 255, 195, 0.2);
+    --error: #ff4d4d;
+    --input-bg: #1a1a1a;
+}
+
+[data-theme="light"] {
+    --bg-dark: #ffffff;
+    --text-dark: #101010;
+    --neon: #00bfa6;
+    --input-bg: #f0f0f0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.login-container {
+    background-color: #161616;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 0 12px var(--neon-soft);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    border: 1px solid var(--neon-soft);
+    position: relative;
+}
+
+.login-container h1 {
+    margin-bottom: 24px;
+    font-size: 26px;
+    text-align: center;
+    color: var(--neon);
+    text-shadow: 0 0 8px var(--neon-soft);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="email"],
+input[type="password"] {
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid var(--neon-soft);
+    border-radius: 8px;
+    background-color: var(--input-bg);
+    color: var(--text-dark);
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+input:focus {
+    border-color: var(--neon);
+    box-shadow: 0 0 6px var(--neon);
+}
+
+button[type="submit"] {
+    background-color: var(--neon);
+    color: var(--text-light);
+    border: none;
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0 0 8px var(--neon-soft);
+}
+
+button[type="submit"]:hover {
+    background-color: #00ddb1;
+    box-shadow: 0 0 12px var(--neon);
+}
+
+#toggle-theme {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    color: var(--neon);
+    border: 1px solid var(--neon-soft);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 5px var(--neon-soft);
+}
+
+#toggle-theme:hover {
+    background: var(--neon);
+    color: var(--text-light);
+    box-shadow: 0 0 12px var(--neon);
+}
+
+.erro {
+    color: var(--error);
+    text-align: center;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+.creditos {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    text-align: center;
+    opacity: 0.6;
+    color: var(--neon);
+    text-shadow: 0 0 4px var(--neon-soft);
+}
+
+:root {
+    --neon: #00ffe0;
+    --neon-soft: #00ffe055;
+    --text-light: #0f0f0f;
+}
+
+.btn-voltar {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 25px;
+    color: var(--neon);
+    border: 2px solid var(--neon);
+    border-radius: 25px;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    text-align: center;
+    transition: 0.3s ease;
+    box-shadow: 0 0 5px var(--neon-soft);
+    cursor: pointer;
+}
+
+.btn-voltar:hover {
+    background-color: var(--neon);
+    color: var(--text-light);
+    box-shadow: 0 0 12px var(--neon);
+}
+
+.link-cadastro {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: var(--text-color-dark);
+}
+
+.link-cadastro a {
+    color: #0ff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.link-cadastro a:hover {
+    color: #0cf;
+}
+
