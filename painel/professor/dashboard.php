@@ -43,7 +43,7 @@ $mensagens_nao_lidas = $mensagens_result['mensagens_nao_lidas'];
         <a href="fichas.php">💪 Fichas de Treino</a>
         <a href="avaliacoes.php">📊 Avaliações</a>
         <a href="mensagens.php">💬 Mensagens</a>
-        <a href="logout.php">🚪 Sair</a>
+        <a href="../../logout.php">🚪 Sair</a>
     </div>
 
     <div class="main-content">
