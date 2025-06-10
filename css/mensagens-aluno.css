@@ -1,77 +1,33 @@
 :root {
-    --color-neon-blue: #0ff;
-    --color-text-light: #fff;
-    --color-text-secondary: #ccc;
-    --background-dark: #0d0d0d;
-    --background-panel: #111;
-    --background-card: #1a1a1a;
-    --border-neon-light: rgba(0, 255, 255, 0.2);
-    --border-neon-medium: rgba(0, 255, 255, 0.3);
-    --shadow-neon-light: rgba(0, 255, 255, 0.3);
-    --shadow-neon-medium: rgba(0, 255, 255, 0.4);
-
-    --main-bg: var(--background-dark);
-    --primary-text-color: var(--color-text-light);
-    --secondary-text-color: var(--color-text-secondary);
-    --accent-color: var(--color-neon-blue);
-    --panel-bg: var(--background-panel);
-    --card-bg: var(--background-card);
-    --input-background: var(--background-card);
-    --input-text-color: var(--color-text-light);
-    --button-bg: var(--color-neon-blue);
-    --button-text: var(--background-dark);
-    --button-border: var(--color-neon-blue);
-    --button-shadow: var(--shadow-neon-light);
-    --message-aluno-background: var(--color-neon-blue);
-    --message-aluno-text-color: var(--background-dark);
-    --message-professor-background: var(--background-panel);
-    --message-professor-text-color: var(--color-text-light);
-    --general-border-color: var(--border-neon-light);
-
-    --btn-theme-bg: transparent;
-    --btn-theme-border: var(--color-neon-blue);
-    --btn-theme-color: var(--color-neon-blue);
-    --btn-theme-hover-bg: var(--color-neon-blue);
-    --btn-theme-hover-color: var(--background-dark);
-    --btn-theme-shadow: var(--shadow-neon-light);
+    --base-bg-dark: #080808;
+    --base-bg-light: #f0f0f0;
+    --base-text-dark: #e0e0e0;
+    --base-text-light: #1a1a1a;
+    --base-primary-neon: #00ffff;
+    --base-secondary-neon: #ff00cc;
+    --main-bg: var(--base-bg-dark);
+    --primary-text-color: var(--base-text-dark);
+    --secondary-text-color: #a0a0a0;
+    --panel-bg: #1a1a1a;
+    --card-bg: #222222;
+    --border-light: rgba(0, 255, 255, 0.25);
+    --shadow-light: 0 0 8px rgba(0, 255, 255, 0.3);
+    --shadow-medium: 0 0 15px rgba(0, 255, 255, 0.45);
+    --accent-primary: var(--base-primary-neon);
+    --accent-secondary: var(--base-secondary-neon);
 }
 
 [data-theme="light"] {
-    --color-neon-blue: #0077b3;
-    --color-text-light: #333;
-    --color-text-secondary: #555;
-    --background-dark: #f0f2f5;
-    --background-panel: #ffffff;
-    --background-card: #ffffff;
-    --border-neon-light: rgba(0, 119, 179, 0.2);
-    --border-neon-medium: rgba(0, 119, 179, 0.3);
-    --shadow-neon-light: rgba(0, 119, 179, 0.2);
-    --shadow-neon-medium: rgba(0, 119, 179, 0.3);
-
-    --main-bg: var(--background-dark);
-    --primary-text-color: var(--color-text-light);
-    --secondary-text-color: var(--color-text-secondary);
-    --accent-color: var(--color-neon-blue);
-    --panel-bg: var(--background-panel);
-    --card-bg: var(--background-card);
-    --input-background: #f0f8ff;
-    --input-text-color: var(--primary-text-color);
-    --button-bg: var(--color-neon-blue);
-    --button-text: var(--color-text-light);
-    --button-border: var(--color-neon-blue);
-    --button-shadow: var(--shadow-neon-light);
-    --message-aluno-background: var(--accent-color);
-    --message-aluno-text-color: var(--button-text);
-    --message-professor-background: #e0f2ff;
-    --message-professor-text-color: var(--primary-text-color);
-    --general-border-color: var(--border-neon-light);
-
-    --btn-theme-bg: transparent;
-    --btn-theme-border: var(--color-neon-blue);
-    --btn-theme-color: var(--color-neon-blue);
-    --btn-theme-hover-bg: var(--color-neon-blue);
-    --btn-theme-hover-color: var(--background-panel);
-    --btn-theme-shadow: var(--shadow-neon-light);
+    --main-bg: var(--base-bg-light);
+    --primary-text-color: var(--base-text-light);
+    --secondary-text-color: #777;
+    --panel-bg: #ffffff;
+    --card-bg: #f8f8f8;
+    --border-light: rgba(0, 119, 179, 0.15);
+    --shadow-light: 0 0 8px rgba(0, 119, 179, 0.1);
+    --shadow-medium: 0 0 15px rgba(0, 119, 179, 0.15);
+    --accent-primary: #0077b3;
+    --accent-secondary: #a00080;
 }
 
 * {
@@ -81,39 +37,35 @@
 }
 
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: var(--main-bg);
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    background-color: var(--main-bg);
     color: var(--primary-text-color);
     display: flex;
     min-height: 100vh;
+    transition: background-color 0.4s ease-in-out;
+    overflow: hidden;
 }
 
 .sidebar {
     width: 220px;
     background: var(--panel-bg);
-    padding: 20px;
-    padding-top: 50px;
+    padding: 25px 20px;
     position: fixed;
     height: 100vh;
-    box-shadow: 2px 0 10px var(--shadow-neon-medium);
+    box-shadow: 3px 0 20px rgba(0,0,0,0.3);
     display: flex;
     flex-direction: column;
     z-index: 1000;
-    border-right: 1px solid var(--general-border-color);
+    border-right: 1px solid var(--border-light);
 }
 
 .sidebar h2 {
-    color: var(--accent-color);
+    color: var(--accent-primary);
     margin-bottom: 40px;
     text-align: center;
     font-size: 1.8rem;
-    font-weight: bold;
-    text-shadow: 0 0 5px var(--accent-color);
-}
-
-.sidebar nav {
-    flex-grow: 1;
+    font-weight: 700;
+    text-shadow: 0 0 10px var(--shadow-light);
 }
 
 .sidebar a {
@@ -121,301 +73,224 @@ body {
     margin: 15px 0;
     text-decoration: none;
     color: var(--secondary-text-color);
-    padding: 10px;
+    padding: 12px 15px;
     border-radius: 8px;
-    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
 .sidebar a:hover {
-    background: var(--border-neon-medium);
+    background: rgba(0, 255, 255, 0.1);
     color: var(--primary-text-color);
-    box-shadow: 0 0 12px var(--shadow-neon-light);
-    transform: translateX(5px);
+    transform: translateX(4px);
 }
 
 .sidebar a.active {
-    background: var(--accent-color);
-    color: var(--main-bg);
-    font-weight: bold;
-    box-shadow: 0 0 15px var(--accent-color);
+    background: var(--accent-primary);
+    color: var(--base-bg-dark);
+    font-weight: 700;
+    box-shadow: 0 0 15px var(--shadow-medium);
     transform: translateX(0);
+}
+
+[data-theme="light"] .sidebar a.active {
+    color: var(--base-bg-light);
 }
 
 .main-content {
     margin-left: 220px;
-    padding: 30px;
     flex-grow: 1;
-    overflow-y: auto;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 220px);
+    height: 100vh;
 }
 
 .dashboard-header {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
+    color: var(--accent-primary);
+    font-weight: 700;
+    text-shadow: 0 0 8px var(--accent-primary);
+    padding-bottom: 20px;
     margin-bottom: 20px;
-    color: var(--accent-color);
-    font-weight: bold;
-    text-shadow: 0 0 5px var(--accent-color);
+    border-bottom: 1px solid var(--border-light);
 }
 
 .form-professor {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 25px;
-    padding: 15px;
-    background-color: var(--card-bg);
-    border-radius: 8px;
-    border: 1px solid var(--general-border-color);
-    box-shadow: 0 0 8px var(--shadow-neon-light);
-}
-
-.form-professor label {
-    font-size: 1rem;
-    color: var(--secondary-text-color);
-    font-weight: 500;
+    background-color: var(--panel-bg);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--accent-secondary);
+    box-shadow: 0 0 15px rgba(255,0,204, 0.2);
+    margin-bottom: 20px;
 }
 
 .form-professor select {
-    flex-grow: 1;
-    padding: 10px 12px;
-    border-radius: 6px;
-    background-color: var(--input-background);
-    color: var(--input-text-color);
-    border: 1px solid var(--general-border-color);
-    font-size: 0.95rem;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: var(--card-bg);
+    color: var(--primary-text-color);
+    border: 1px solid var(--border-light);
+    font-size: 1rem;
     outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
 }
 
 .form-professor select:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 12px var(--shadow-neon-light);
+    border-color: var(--accent-secondary);
+    box-shadow: 0 0 10px var(--accent-secondary);
 }
 
 .chat-box {
-    height: 400px;
-    overflow-y: auto;
-    padding: 15px;
-    margin-bottom: 20px;
-    background-color: var(--card-bg);
-    border: 1px solid var(--general-border-color);
-    border-radius: 8px;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    box-shadow: 0 0 8px var(--shadow-neon-light);
+    gap: 15px;
+    overflow-y: auto;
+    padding: 15px;
+    background: var(--panel-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
 }
 
 .mensagem {
-    padding: 10px 15px;
-    border-radius: 10px;
+    padding: 12px 18px;
+    border-radius: 18px;
     max-width: 75%;
-    line-height: 1.4;
+    line-height: 1.5;
     word-wrap: break-word;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.mensagem.aluno {
+    background-color: var(--accent-primary);
+    color: var(--base-bg-dark);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+
+.mensagem.professor {
+    background-color: var(--accent-secondary);
+    color: var(--base-bg-dark);
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+
+[data-theme="light"] .mensagem.aluno,
+[data-theme="light"] .mensagem.professor {
+    color: var(--base-bg-light);
+}
+
+.mensagem p {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
 }
 
 .mensagem span {
     display: block;
-    font-size: 0.95rem;
-}
-
-.mensagem small {
-    display: block;
-    font-size: 0.75rem;
-    margin-top: 5px;
-    opacity: 0.8;
-}
-
-.mensagem.aluno {
-    background-color: var(--message-aluno-background);
-    color: var(--message-aluno-text-color);
-    align-self: flex-end;
-    border-bottom-right-radius: 2px;
-    box-shadow: 0 0 5px var(--accent-color);
-}
-
-.mensagem.aluno small {
-    text-align: right;
-    color: var(--message-aluno-text-color);
-}
-
-.mensagem.professor {
-    background-color: var(--message-professor-background);
-    color: var(--message-professor-text-color);
-    align-self: flex-start;
-    border-bottom-left-radius: 2px;
-    border: 1px solid var(--general-border-color);
-}
-
-.mensagem.professor small {
-    text-align: left;
-    color: var(--message-professor-text-color);
+    font-size: 0.8rem;
+    margin-top: 8px;
     opacity: 0.7;
+}
+
+.mensagem.professor span {
+    text-align: right;
 }
 
 .form-chat {
     display: flex;
-    gap: 10px;
-    align-items: stretch;
-    margin-top: 20px;
+    gap: 15px;
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-light);
 }
 
 .form-chat input[type="text"] {
     flex-grow: 1;
-    padding: 0 12px;
-    border-radius: 6px;
-    background-color: var(--input-background);
-    color: var(--input-text-color);
-    border: 1px solid var(--general-border-color);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 50px;
+    padding: 0 18px;
+    border-radius: 10px;
+    background-color: var(--card-bg);
+    color: var(--primary-text-color);
+    border: 1px solid var(--border-light);
     font-size: 1rem;
     outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    height: 50px;
+    transition: all 0.2s ease-in-out;
 }
 
 .form-chat input[type="text"]:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 12px var(--shadow-neon-light);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 10px var(--shadow-light);
 }
 
 .form-chat button {
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    padding: 0 25px;
-    border-radius: 6px;
+    height: 50px;
+    background-color: var(--accent-primary);
+    color: var(--base-bg-dark);
+    padding: 0 30px;
+    border-radius: 10px;
     font-weight: 600;
     font-size: 1rem;
     border: none;
     cursor: pointer;
-    box-shadow: 0 0 10px var(--button-shadow), 0 0 20px var(--button-shadow);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 0 10px var(--shadow-light);
+}
+
+[data-theme="light"] .form-chat button {
+    color: var(--base-bg-light);
 }
 
 .form-chat button:hover {
-    background-color: color-mix(in srgb, var(--button-bg) 90%, black);
-    box-shadow: 0 0 15px var(--button-shadow), 0 0 30px var(--button-shadow);
     transform: translateY(-2px);
-}
-
-.form-chat button:active {
-    transform: translateY(0);
+    box-shadow: 0 4px 20px var(--shadow-medium);
 }
 
 #toggle-theme {
     position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 8px 18px;
-    background: var(--btn-theme-bg);
-    border: 2px solid var(--btn-theme-border);
-    color: var(--btn-theme-color);
+    top: 25px;
+    right: 25px;
+    padding: 10px 22px;
+    background: transparent;
+    border: 2px solid var(--accent-primary);
+    color: var(--accent-primary);
     font-weight: 600;
     border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s ease;
-    z-index: 1000;
-    box-shadow: 0 0 8px var(--btn-theme-shadow);
+    z-index: 1001;
 }
+
 #toggle-theme:hover {
-    background: var(--btn-theme-hover-bg);
-    color: var(--btn-theme-hover-color);
-    box-shadow: 0 0 15px var(--btn-theme-shadow);
+    background: var(--accent-primary);
+    color: var(--base-bg-dark);
+}
+
+[data-theme="light"] #toggle-theme:hover {
+    color: var(--base-bg-light);
 }
 
 @media (max-width: 768px) {
     body {
         flex-direction: column;
+        height: auto;
+        overflow: auto;
     }
-
     .sidebar {
         width: 100%;
         position: relative;
         height: auto;
-        box-shadow: 0 2px 10px var(--shadow-neon-medium);
-        border-right: none;
-        border-bottom: 1px solid var(--general-border-color);
-        padding-bottom: 10px;
-        padding-top: 30px;
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 5px;
     }
-
-    .sidebar h2 {
-        font-size: 1.5rem;
-        margin-bottom: 25px;
-        width: 100%;
-    }
-
-    .sidebar nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 5px;
-    }
-
-    .sidebar a {
-        flex-grow: 1;
-        justify-content: center;
-        margin: 5px;
-        padding: 8px;
-        font-size: 0.9rem;
-        text-align: center;
-    }
-
     .main-content {
         margin-left: 0;
-        padding: 20px;
-    }
-
-    .dashboard-header {
-        font-size: 1.8rem;
-    }
-
-    .form-professor {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 15px;
-    }
-
-    .chat-box {
-        height: 300px;
-    }
-
-    .form-chat input[type="text"],
-    .form-chat button {
-        height: 45px;
-        font-size: 0.9rem;
-    }
-    .form-chat button {
-        padding: 0 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .main-content {
-        padding: 15px;
-    }
-    .dashboard-header {
-        font-size: 1.6rem;
-    }
-    .chat-box {
-        height: 250px;
-    }
-    .mensagem {
-        max-width: 85%;
-    }
-    .form-chat {
-        flex-direction: column;
-        gap:15px;
-    }
-    .form-chat input[type="text"],
-    .form-chat button {
         width: 100%;
+        height: auto;
+        padding: 25px;
     }
 }
