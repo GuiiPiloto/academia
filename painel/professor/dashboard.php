@@ -39,7 +39,7 @@ $mensagens_nao_lidas = $mensagens_result['mensagens_nao_lidas'];
 
     <div class="sidebar">
         <h2>TOPFIT</h2>
-        <a href="index.php" class="active">🏠 Início</a>
+        <a href="dashboard.php" class="active">🏠 Início</a>
         <a href="fichas.php">💪 Fichas de Treino</a>
         <a href="avaliacoes.php">📊 Avaliações</a>
         <a href="mensagens.php">💬 Mensagens</a>
