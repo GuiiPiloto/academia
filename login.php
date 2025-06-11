@@ -51,7 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br" data-theme="dark">
 <head>
@@ -62,43 +61,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-    <button id="toggle-theme">🌙 Modo Claro</button>
-    <div class="login-container">
-        <h1>Login TopFit</h1>
-        <?php if ($erro): ?>
-            <p class="erro"><?php echo $erro; ?></p>
-        <?php endif; ?>
-        <form method="POST" action="login.php">
-            <input type="email" name="email" placeholder="E-mail" required>
-            <input type="password" name="senha" placeholder="Senha" required>
-            <button type="submit">Entrar</button>
-        </form>
-        <a href="index.php" class="btn-voltar">← Voltar à Página Inicial</a>
-        <p class="link-cadastro">
-    Ainda não tem conta? <a href="cadastrar.php">Cadastre-se</a>
-        </p>
-        <p class="creditos">© 2025 TopFit Academia</p>
-    </div>
+    <button id="toggle-theme" class="theme-toggle">🌙</button>
+
+    <main class="form-page-container">
+        <div class="form-wrapper">
+            <header class="form-header">
+                <a href="index.php" class="logo">TopFit <span>Academia</span></a>
+                <h1>Acesse sua Conta</h1>
+                <p>Bem-vindo(a) de volta! Entre com seus dados.</p>
+            </header>
+
+            <?php if ($erro): ?>
+                <div class="alert alert-danger"><?php echo $erro; ?></div>
+            <?php endif; ?>
+
+            <section class="form-section">
+                <form method="POST" action="login.php">
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" name="email" id="email" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <input type="password" name="senha" id="senha" placeholder="Sua senha" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Entrar</button>
+                </form>
+            </section>
+
+            <footer class="form-footer">
+                <p>Ainda não tem conta? <a href="cadastrar.php" class="link-destaque">Cadastre-se</a></p>
+                <a href="index.php" class="voltar-link">← Voltar à Página Inicial</a>
+            </footer>
+        </div>
+    </main>
 
     <script>
         const toggleButton = document.getElementById("toggle-theme");
         const html = document.documentElement;
 
-        if (localStorage.getItem("theme") === "light") {
-            html.setAttribute("data-theme", "light");
-            toggleButton.textContent = "🌑 Modo Escuro";
+        function applyTheme(theme) {
+            html.setAttribute("data-theme", theme);
+            localStorage.setItem("theme", theme);
+            toggleButton.textContent = theme === 'light' ? '🌑' : '🌙';
         }
 
+        const initialTheme = localStorage.getItem("theme") || 'dark';
+        applyTheme(initialTheme);
+
         toggleButton.addEventListener("click", () => {
-            if (html.getAttribute("data-theme") === "dark") {
-                html.setAttribute("data-theme", "light");
-                localStorage.setItem("theme", "light");
-                toggleButton.textContent = "🌑 Modo Escuro";
-            } else {
-                html.setAttribute("data-theme", "dark");
-                localStorage.setItem("theme", "dark");
-                toggleButton.textContent = "🌙 Modo Claro";
-            }
+            const currentTheme = html.getAttribute("data-theme");
+            applyTheme(currentTheme === "dark" ? "light" : "dark");
         });
     </script>
 </body>
