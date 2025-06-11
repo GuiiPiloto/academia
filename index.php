@@ -12,7 +12,7 @@
 
     <header class="main-header">
         <div class="container">
-            <a href="index.php" class="logo">TopFit <span>Academia</span></a>
+            <a href="index.php" class="logo">TOPFIT <span>Academia</span></a>
             <nav class="main-nav">
                 <a href="login.php" class="btn btn-primary">Entrar no Sistema</a>
                 <button id="toggle-theme" class="theme-toggle">🌙</button>

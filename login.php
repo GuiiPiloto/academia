@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <main class="form-page-container">
         <div class="form-wrapper">
             <header class="form-header">
-                <a href="index.php" class="logo">TopFit <span>Academia</span></a>
+                <a href="index.php" class="logo">TOPFIT <span>Academia</span></a>
                 <h1>Acesse sua Conta</h1>
                 <p>Bem-vindo(a) de volta! Entre com seus dados.</p>
             </header>
