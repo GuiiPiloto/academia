@@ -5,48 +5,18 @@ verificarLogin("professor");
 
 require_once "../../config/conexao.php";
 
-// Buscar todos os alunos
-$sql = "SELECT id, nome FROM usuarios WHERE tipo = 'aluno'";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->get_result();
-
+$mensagem = "";
 $aluno_id = isset($_GET['aluno_id']) ? intval($_GET['aluno_id']) : null;
 
-// Excluir exercício individual
 if (isset($_GET['excluir_id'])) {
     $excluir_id = intval($_GET['excluir_id']);
     $sql_delete = "DELETE FROM fichas WHERE id = ?";
     $stmt_delete = $conn->prepare($sql_delete);
     $stmt_delete->bind_param("i", $excluir_id);
-    $stmt_delete->execute();
-    header("Location: fichas.php?aluno_id=" . $aluno_id);
-    exit;
-}
-
-// Dados da ficha
-$grupo_muscular = $exercicio = $series = $repeticoes = $descanso = "";
-$ficha = null;
-$fichas = [];
-
-if ($aluno_id) {
-    $sql_fichas = "SELECT * FROM fichas WHERE aluno_id = ?";
-    $stmt_fichas = $conn->prepare($sql_fichas);
-    $stmt_fichas->bind_param("i", $aluno_id);
-    $stmt_fichas->execute();
-    $fichas_result = $stmt_fichas->get_result();
-
-    while ($linha = $fichas_result->fetch_assoc()) {
-        $fichas[] = $linha;
-    }
-
-    if (count($fichas) > 0) {
-        $ficha = $fichas[0]; // usado para preencher o formulário
-        $grupo_muscular = $ficha['grupo_muscular'];
-        $exercicio = $ficha['exercicio'];
-        $series = $ficha['series'];
-        $repeticoes = $ficha['repeticoes'];
-        $descanso = $ficha['descanso'];
+    if ($stmt_delete->execute()) {
+        $mensagem = "✅ Exercício excluído com sucesso!";
+    } else {
+        $mensagem = "❌ Erro ao excluir o exercício.";
     }
 }
 
@@ -59,19 +29,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $descanso = $_POST['descanso'];
 
     if (!$aluno_id) {
-        echo "<p style='color:red'>Erro: Nenhum aluno selecionado.</p>";
-        exit;
+        $mensagem = "❌ Erro: Nenhum aluno selecionado.";
+    } else {
+        $sql_insert = "INSERT INTO fichas (aluno_id, grupo_muscular, exercicio, series, repeticoes, descanso, criado_por) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt_insert = $conn->prepare($sql_insert);
+        $stmt_insert->bind_param("isssssi", $aluno_id, $grupo_muscular, $exercicio, $series, $repeticoes, $descanso, $_SESSION["usuario_id"]);
+        
+        if ($stmt_insert->execute()) {
+            $mensagem = "✅ Exercício adicionado com sucesso!";
+        } else {
+            $mensagem = "❌ Erro ao adicionar exercício.";
+        }
     }
+}
 
-    // Inserir novo exercício
-    $sql_insert = "INSERT INTO fichas (aluno_id, grupo_muscular, exercicio, series, repeticoes, descanso, criado_por)
-                   VALUES (?, ?, ?, ?, ?, ?, ?)";
-    $stmt_insert = $conn->prepare($sql_insert);
-    $stmt_insert->bind_param("isssssi", $aluno_id, $grupo_muscular, $exercicio, $series, $repeticoes, $descanso, $_SESSION["usuario_id"]);
-    $stmt_insert->execute();
+$sql_alunos = "SELECT id, nome FROM usuarios WHERE tipo = 'aluno'";
+$stmt_alunos = $conn->prepare($sql_alunos);
+$stmt_alunos->execute();
+$result_alunos = $stmt_alunos->get_result();
 
-    header("Location: fichas.php?aluno_id=" . $aluno_id);
-    exit;
+$fichas = [];
+if ($aluno_id) {
+    $sql_fichas = "SELECT * FROM fichas WHERE aluno_id = ?";
+    $stmt_fichas = $conn->prepare($sql_fichas);
+    $stmt_fichas->bind_param("i", $aluno_id);
+    $stmt_fichas->execute();
+    $fichas_result = $stmt_fichas->get_result();
+    while ($linha = $fichas_result->fetch_assoc()) {
+        $fichas[] = $linha;
+    }
 }
 
 $aluno_nome = "";
@@ -110,14 +96,14 @@ if ($aluno_id) {
 
     <div class="main-content">
         <div class="dashboard-header">
-            <h1>Selecione um aluno para criar ou editar a ficha de treino</h1>
+            <h2>Selecione um aluno para criar ou editar a ficha de treino</h2>
         </div>
 
         <div class="alunos">
-            <form action="fichas.php" method="get">
-                <select name="aluno_id" onchange="this.form.submit()" required>
+            <form action="fichas.php" method="get" id="filtro-aluno-form">
+                <select name="aluno_id" onchange="document.getElementById('filtro-aluno-form').submit()" required>
                     <option value="">Escolha um aluno</option>
-                    <?php while ($aluno = $result->fetch_assoc()): ?>
+                    <?php while ($aluno = $result_alunos->fetch_assoc()): ?>
                         <option value="<?php echo $aluno['id']; ?>" <?php echo ($aluno['id'] == $aluno_id) ? 'selected' : ''; ?>>
                             <?php echo htmlspecialchars($aluno['nome']); ?>
                         </option>
@@ -132,19 +118,19 @@ if ($aluno_id) {
                 <input type="hidden" name="aluno_id" value="<?php echo $aluno_id; ?>">
 
                 <label for="grupo_muscular">Grupo Muscular</label>
-                <input type="text" name="grupo_muscular" value="<?php echo htmlspecialchars($grupo_muscular); ?>" required>
+                <input type="text" name="grupo_muscular" required>
 
                 <label for="exercicio">Exercício</label>
-                <input type="text" name="exercicio" value="<?php echo htmlspecialchars($exercicio); ?>" required>
+                <input type="text" name="exercicio" required>
 
                 <label for="series">Séries</label>
-                <input type="number" name="series" value="<?php echo htmlspecialchars($series); ?>" required>
+                <input type="number" name="series" required>
 
                 <label for="repeticoes">Repetições</label>
-                <input type="text" name="repeticoes" value="<?php echo htmlspecialchars($repeticoes); ?>" required>
+                <input type="text" name="repeticoes" required>
 
                 <label for="descanso">Descanso (em segundos)</label>
-                <input type="text" name="descanso" value="<?php echo htmlspecialchars($descanso); ?>" required>
+                <input type="text" name="descanso" required>
 
                 <button type="submit">Adicionar Exercício</button>
             </form>
@@ -164,7 +150,7 @@ if ($aluno_id) {
 
                 <?php foreach ($agrupado as $grupo => $exercicios): ?>
                     <h3><?php echo htmlspecialchars($grupo); ?></h3>
-                    <table border="1" cellpadding="6" cellspacing="0" style="margin-bottom: 20px; width: 100%; max-width: 800px;">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Exercício</th>
@@ -192,6 +178,8 @@ if ($aluno_id) {
             <?php endif; ?>
         <?php endif; ?>
     </div>
+    
+    <div id="container-notificacoes"></div>
 
     <script>
         const toggleButton = document.getElementById('toggle-theme');
@@ -203,16 +191,33 @@ if ($aluno_id) {
             toggleButton.textContent = (theme === 'light') ? '🌑 Modo Escuro' : '🌙 Modo Claro';
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) applyTheme(savedTheme);
+        function mostrarNotificacao(mensagem, tipo = 'sucesso') {
+            const container = document.getElementById('container-notificacoes');
+            const notificacaoDiv = document.createElement('div');
+            notificacaoDiv.className = `notificacao ${tipo}`;
+            notificacaoDiv.textContent = mensagem;
+            container.appendChild(notificacaoDiv);
+            setTimeout(() => {
+                notificacaoDiv.remove();
+            }, 4000);
+        }
 
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(savedTheme);
+            
             toggleButton.addEventListener('click', () => {
-                const currentTheme = htmlElement.getAttribute('data-theme');
-                applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+                const newTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
             });
         });
     </script>
 
+    <?php
+    if (!empty($mensagem)) {
+        $tipo = (strpos($mensagem, '✅') !== false) ? 'sucesso' : 'erro';
+        echo "<script>mostrarNotificacao('" . addslashes($mensagem) . "', '" . $tipo . "');</script>";
+    }
+    ?>
 </body>
 </html>
