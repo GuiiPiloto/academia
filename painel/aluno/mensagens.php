@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mensagem'], $_POST['p
         <button id="toggle-theme">🌙 Modo Claro</button>
 
 <div class="sidebar">
-    <h2>TopFit</h2>
+    <h2>TOPFIT</h2>
     <a href="dashboard.php">🏠 Início</a>
     <a href="presencas.php">📅 Presenças</a>
     <a href="ficha.php">💪 Ficha de Treino</a>

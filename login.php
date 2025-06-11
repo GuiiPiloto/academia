@@ -6,38 +6,43 @@ $erro = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);
-    $senha = sha1($_POST["senha"]);
+    $senhaDigitada = $_POST["senha"];
 
-    $sql = "SELECT * FROM usuarios WHERE email = ? AND senha = ?";
+    $sql = "SELECT id, nome, senha, tipo FROM usuarios WHERE email = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $email, $senha);
+    $stmt->bind_param("s", $email);
     
     if ($stmt->execute()) {
         $result = $stmt->get_result();
+        
         if ($result->num_rows === 1) {
             $usuario = $result->fetch_assoc();
+            $hashSalvoNoBanco = $usuario['senha'];
 
-            $_SESSION["usuario_id"] = $usuario["id"];
-            $_SESSION["nome"] = $usuario["nome"];
-            $_SESSION["tipo"] = $usuario["tipo"];
+            if (password_verify($senhaDigitada, $hashSalvoNoBanco)) {
+                $_SESSION["usuario_id"] = $usuario["id"];
+                $_SESSION["nome"] = $usuario["nome"];
+                $_SESSION["tipo"] = $usuario["tipo"];
 
-            // Redireciona com base no tipo
-            switch ($usuario["tipo"]) {
-                case 'aluno':
-                    header("Location: painel/aluno/dashboard.php");
-                    break;
-                case 'professor':
-                    header("Location: painel/professor/dashboard.php");
-                    break;
-                case 'admin':
-                    header("Location: painel/admin/dashboard.php");
-                    break;
-                default:
-                    $erro = "Tipo de usuário inválido.";
-                    session_destroy();
-                    exit;
+                switch ($usuario["tipo"]) {
+                    case 'aluno':
+                        header("Location: painel/aluno/dashboard.php");
+                        break;
+                    case 'professor':
+                        header("Location: painel/professor/dashboard.php");
+                        break;
+                    case 'admin':
+                        header("Location: painel/admin/dashboard.php");
+                        break;
+                    default:
+                        $erro = "Tipo de usuário inválido.";
+                        session_destroy();
+                        exit;
+                }
+                exit;
+            } else {
+                $erro = "E-mail ou senha incorretos.";
             }
-            exit;
         } else {
             $erro = "E-mail ou senha incorretos.";
         }
@@ -46,7 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br" data-theme="dark">

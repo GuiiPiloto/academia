@@ -4,11 +4,10 @@ require_once "../../includes/verificar.php";
 verificarLogin("professor");
 
 $nome_professor = $_SESSION["nome"] ?? 'Professor';
-$usuario_id = $_SESSION["usuario_id"];  
+$usuario_id = $_SESSION["usuario_id"];
 
 require_once "../../config/conexao.php";
 
-// Buscar número de fichas criadas no último mês
 $sql_fichas = "SELECT COUNT(*) AS fichas_ultimo_mes FROM fichas WHERE criado_em >= CURDATE() - INTERVAL 1 MONTH AND criado_por = ?";
 $stmt_fichas = $conn->prepare($sql_fichas);
 $stmt_fichas->bind_param("i", $usuario_id);
@@ -16,8 +15,7 @@ $stmt_fichas->execute();
 $fichas_result = $stmt_fichas->get_result()->fetch_assoc();
 $fichas_ultimo_mes = $fichas_result['fichas_ultimo_mes'];
 
-// Buscar número de mensagens não lidas
-$sql_mensagens = "SELECT COUNT(*) AS mensagens_nao_lidas FROM mensagens WHERE professor_id = ? AND lida = 0";
+$sql_mensagens = "SELECT COUNT(*) AS mensagens_nao_lidas FROM mensagens WHERE professor_id = ? AND lida = 0 AND remetente = 'aluno'";
 $stmt_mensagens = $conn->prepare($sql_mensagens);
 $stmt_mensagens->bind_param("i", $usuario_id);
 $stmt_mensagens->execute();
@@ -45,14 +43,14 @@ $mensagens_nao_lidas = $mensagens_result['mensagens_nao_lidas'];
         <a href="fichas.php">💪 Fichas de Treino</a>
         <a href="avaliacoes.php">📊 Avaliações</a>
         <a href="mensagens.php">💬 Mensagens</a>
-        <a href="../../index.php">🚪 Sair</a>
+        <a href="../../logout.php">🚪 Sair</a>
     </div>
 
     <div class="main-content">
         <div class="dashboard-header">
-            Bem-vindo,Professor <?php echo htmlspecialchars($nome_professor); ?>!
+            Bem-vindo, Professor <?php echo htmlspecialchars($nome_professor); ?>!
         </div>
-        
+
         <div class="cards">
             <div class="card">
                 <h3>Fichas de Treino</h3>

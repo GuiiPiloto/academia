@@ -81,11 +81,12 @@
     --light-info-box-text-color: var(--light-primary-text-color);
     --light-info-box-title-color: var(--light-info-box-title-color);
 
-    --light-status-presente: #00a854;
-    --light-status-falta: #cc3333;
-    --light-status-text-dark: #fff;
+    --status-presente: #00a854;
+    --status-falta: #cc3333;
+    --status-text-dark: #fff;
 
-    --select-arrow-svg: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FF00CC%22%20d%3D%22M287%2C197.8l-133.4%2C133.4c-2.7%2C2.7-6.2%2C4-9.7%2C4s-7-1.3-9.7-4L5.4%2C197.8c-7.2-7.2-7.2-18.8%2C0-26s18.8-7.2%2C26%2C0l104.9%2C104.9L256.3%2C171.8c7.2-7.2%2C18.8-7.2%2C26%2C0S294.2%2C190.6%2C287%2C197.8z%22%2F%3E%3C%2Fsvg%3E');
+    --select-arrow-color: var(--base-secondary-neon);
+    --select-arrow-svg: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22' + encodeURIComponent(getComputedStyle(document.documentElement).getPropertyValue('--select-arrow-color')) + '%22%20d%3D%22M287%2C197.8l-133.4%2C133.4c-2.7%2C2.7-6.2%2C4-9.7%2C4s-7-1.3-9.7-4L5.4%2C197.8c-7.2-7.2-7.2-18.8%2C0-26s18.8-7.2%2C26%2C0l104.9%2C104.9L256.3%2C171.8c7.2-7.2%2C18.8-7.2%2C26%2C0S294.2%2C190.6%2C287%2C197.8z%22%2F%3E%3C%2Fsvg%3E');
 }
 
 [data-theme="light"] {
@@ -115,13 +116,13 @@
     --nav-card-text: var(--light-nav-card-text);
     --nav-card-active-text: var(--light-nav-card-active-text);
     --nav-card-hover-bg: var(--light-nav-card-hover-bg);
-    --nav-card-active-bg: var(--light-nav-card-active-bg);
+    --nav-card-active-bg: var(--light-accent-primary);
     --nav-card-shadow: var(--light-nav-card-shadow);
     --nav-card-active-shadow: var(--light-nav-card-active-shadow);
 
     --info-box-bg: var(--light-info-box-bg);
-    --info-box-border: var(--light-info-box-border);
-    --info-box-shadow: var(--light-info-box-shadow);
+    --info-box-border: var(--light-border-light);
+    --info-box-shadow: var(--light-shadow-light);
     --info-box-text-color: var(--light-primary-text-color);
     --info-box-title-color: var(--light-info-box-title-color);
 
@@ -129,7 +130,8 @@
     --status-falta: var(--light-status-falta);
     --status-text-dark: var(--light-status-text-dark);
 
-    --select-arrow-svg: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%230077B3%22%20d%3D%22M287%2C197.8l-133.4%2C133.4c-2.7%2C2.7-6.2%2C4-9.7%2C4s-7-1.3-9.7-4L5.4%2C197.8c-7.2-7.2-7.2-18.8%2C0-26s18.8-7.2%2C26%2C0l104.9%2C104.9L256.3%2C171.8c7.2-7.2%2C18.8-7.2%2C26%2C0S294.2%2C190.6%2C287%2C197.8z%22%2F%3E%3C%2Fsvg%3E');
+    --select-arrow-color: var(--light-accent-primary);
+    --select-arrow-svg: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22' + encodeURIComponent(getComputedStyle(document.documentElement).getPropertyValue('--select-arrow-color')) + '%22%20d%3D%22M287%2C197.8l-133.4%2C133.4c-2.7%2C2.7-6.2%2C4-9.7%2C4s-7-1.3-9.7-4L5.4%2C197.8c-7.2-7.2-7.2-18.8%2C0-26s18.8-7.2%2C26%2C0l104.9%2C104.9L256.3%2C171.8c7.2-7.2%2C18.8-7.2%2C26%2C0S294.2%2C190.6%2C287%2C197.8z%22%2F%3E%3C%2Fsvg%3E');
 }
 
 * {
@@ -233,25 +235,19 @@ body {
     to { opacity: 1; }
 }
 
-.main-content > h1 {
-    font-size: 2.2rem;
+.dashboard-header {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
     margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+    font-size: 2.2rem;
     color: var(--accent-primary);
     font-weight: 900;
     text-shadow: 0 0 8px var(--accent-primary), 0 0 15px rgba(0, 255, 255, 0.4);
-    text-align: center;
     letter-spacing: 1.5px;
-    width: 100%;
-    max-width: 700px;
-}
-
-.main-content p {
-    margin-bottom: 20px;
-    padding: 10px 15px;
-    border-radius: 8px;
-    font-weight: 600;
-    text-align: center;
-    opacity: 0.9;
 }
 
 #toggle-theme {
@@ -269,7 +265,6 @@ body {
     z-index: 1001;
     box-shadow: var(--button-toggle-shadow);
     letter-spacing: 0.5px;
-    font-size: 1rem;
 }
 #toggle-theme:hover {
     background: var(--button-toggle-hover-bg);
@@ -281,7 +276,7 @@ body {
     transform: translateY(0);
 }
 
-.aluno-select {
+.alunos {
     width: 100%;
     max-width: 600px;
     margin-bottom: 30px;
@@ -295,13 +290,7 @@ body {
     gap: 15px;
 }
 
-.aluno-select label {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--primary-text-color);
-}
-
-.aluno-select select {
+.alunos select {
     width: 100%;
     background: var(--panel-bg);
     color: var(--primary-text-color);
@@ -321,31 +310,27 @@ body {
     cursor: pointer;
 }
 
-[data-theme="light"] .aluno-select select {
-    background-image: var(--select-arrow-svg);
-}
-
-.aluno-select select:hover {
+.alunos select:hover {
     border-color: var(--accent-secondary);
     box-shadow: 0 0 20px rgba(255, 0, 204, 0.5);
     transform: translateY(-2px);
 }
-.aluno-select select:focus {
+.alunos select:focus {
     outline: none;
     border-color: var(--accent-primary);
     box-shadow: 0 0 25px var(--accent-primary);
 }
 
-.aluno-select select option {
+.alunos select option {
     background-color: var(--panel-bg);
     color: var(--primary-text-color);
 }
-.aluno-select select option:checked {
+.alunos select option:checked {
     background-color: var(--accent-secondary);
     color: var(--base-bg-dark);
 }
 
-.chat-box {
+.chat {
     width: 100%;
     max-width: 800px;
     background: var(--panel-bg);
@@ -356,27 +341,60 @@ body {
     max-height: 500px;
     overflow-y: auto;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
-.chat-box::-webkit-scrollbar {
+.chat::-webkit-scrollbar {
     width: 8px;
 }
 
-.chat-box::-webkit-scrollbar-track {
+.chat::-webkit-scrollbar-track {
     background: var(--panel-bg);
     border-radius: 10px;
 }
 
-.chat-box::-webkit-scrollbar-thumb {
+.chat::-webkit-scrollbar-thumb {
     background-color: var(--accent-secondary);
     border-radius: 10px;
     border: 2px solid var(--panel-bg);
 }
 
-.mensagem {
+.chat-header-aluno {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-light);
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--secondary-text-color);
+    box-shadow: var(--shadow-light);
+    transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out, border-color 0.4s ease-in-out;
+}
+
+.chat-header-aluno .aluno-nome-chat {
+    color: var(--accent-primary);
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
+}
+
+.mensagens {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.msg-professor, .msg-aluno {
     padding: 10px 15px;
     border-radius: 12px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     line-height: 1.5;
     word-wrap: break-word;
     box-shadow: var(--shadow-light);
@@ -384,66 +402,60 @@ body {
     position: relative;
 }
 
-.mensagem strong {
-    font-weight: 700;
-    margin-right: 5px;
+.msg-professor p, .msg-aluno p {
+    margin: 0 0 5px 0;
+    color: inherit;
+    font-weight: normal;
+    background: none;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    text-align: left;
 }
 
-.mensagem small {
+.msg-professor span, .msg-aluno span {
     display: block;
     font-size: 0.75em;
     opacity: 0.7;
     margin-top: 5px;
 }
 
-.mensagem.professor {
+.msg-professor {
     background-color: rgba(255, 0, 204, 0.15);
     color: var(--primary-text-color);
     text-align: right;
     border: 1px solid var(--accent-secondary);
+    align-self: flex-end;
     margin-left: 20%;
     border-bottom-right-radius: 4px;
 }
-.mensagem.professor strong {
-    color: var(--accent-secondary);
-}
-.mensagem.professor small {
+.msg-professor span {
     color: rgba(255, 0, 204, 0.8);
 }
 
-
-.mensagem.aluno {
+.msg-aluno {
     background-color: rgba(0, 255, 255, 0.15);
     color: var(--primary-text-color);
     text-align: left;
     border: 1px solid var(--accent-primary);
+    align-self: flex-start;
     margin-right: 20%;
     border-bottom-left-radius: 4px;
 }
-.mensagem.aluno strong {
-    color: var(--accent-primary);
-}
-.mensagem.aluno small {
+.msg-aluno span {
     color: rgba(0, 255, 255, 0.8);
 }
 
-
-.chat-box hr {
-    border: none;
-    border-top: 1px dashed var(--border-light);
-    margin: 15px 0;
-}
-
-.form-mensagem {
+.form-msg {
     display: flex;
     gap: 15px;
     width: 100%;
-    max-width: 800px;
     padding-top: 15px;
     border-top: 1px solid var(--border-light);
+    margin-top: auto;
 }
 
-.form-mensagem input[type="text"] {
+.form-msg input[type="text"] {
     flex-grow: 1;
     padding: 12px 15px;
     border-radius: 10px;
@@ -455,13 +467,13 @@ body {
     transition: all 0.3s ease;
 }
 
-.form-mensagem input[type="text"]:focus {
+.form-msg input[type="text"]:focus {
     outline: none;
     border-color: var(--accent-secondary);
     box-shadow: 0 0 12px var(--accent-secondary);
 }
 
-.form-mensagem button {
+.form-msg button {
     padding: 12px 25px;
     background: var(--accent-primary);
     color: var(--base-bg-dark);
@@ -474,157 +486,167 @@ body {
     box-shadow: 0 0 10px var(--accent-primary);
 }
 
-.form-mensagem button:hover {
+.form-msg button:hover {
     background: var(--accent-primary);
     box-shadow: 0 0 20px var(--accent-primary);
     transform: translateY(-2px);
 }
 
-.form-mensagem button:active {
+.form-msg button:active {
     transform: translateY(0);
     box-shadow: 0 0 10px var(--accent-primary);
 }
 
-
-[data-theme="light"] .aluno-select {
+[data-theme="light"] .alunos {
     background: var(--light-card-bg);
     box-shadow: 0 0 18px rgba(0, 119, 179, 0.2);
     border: 2px solid var(--light-accent-secondary);
 }
 
-[data-theme="light"] .aluno-select select {
+[data-theme="light"] .alunos select {
     background: var(--light-panel-bg);
     color: var(--light-primary-text-color);
     border: 1px solid var(--light-accent-secondary);
     box-shadow: 0 0 10px rgba(0, 119, 179, 0.15);
 }
 
-[data-theme="light"] .aluno-select select:hover {
+[data-theme="light"] .alunos select:hover {
     border-color: var(--light-accent-secondary);
     box-shadow: 0 0 20px rgba(0, 119, 179, 0.25);
 }
-[data-theme="light"] .aluno-select select:focus {
+[data-theme="light"] .alunos select:focus {
     border-color: var(--light-accent-primary);
     box-shadow: 0 0 25px var(--light-accent-primary);
 }
 
-[data-theme="light"] .aluno-select select option {
+[data-theme="light"] .alunos select option {
     background-color: var(--light-panel-bg);
     color: var(--light-primary-text-color);
 }
-[data-theme="light"] .aluno-select select option:checked {
+[data-theme="light"] .alunos select option:checked {
     background-color: var(--light-accent-secondary);
     color: var(--light-main-bg);
 }
 
-[data-theme="light"] .chat-box {
+[data-theme="light"] .chat {
     background: var(--light-panel-bg);
     box-shadow: var(--light-shadow-medium);
     border: 1px solid var(--light-border-medium);
 }
 
-[data-theme="light"] .chat-box::-webkit-scrollbar-track {
+[data-theme="light"] .chat::-webkit-scrollbar-track {
     background: var(--light-panel-bg);
 }
 
-[data-theme="light"] .chat-box::-webkit-scrollbar-thumb {
+[data-theme="light"] .chat::-webkit-scrollbar-thumb {
     background-color: var(--light-accent-secondary);
     border: 2px solid var(--light-panel-bg);
 }
 
-[data-theme="light"] .mensagem.professor {
+[data-theme="light"] .chat-header-aluno {
+    background-color: var(--light-card-bg);
+    border-bottom: 1px solid var(--light-border-light);
+    color: var(--light-secondary-text-color);
+    box-shadow: var(--light-shadow-light);
+}
+
+[data-theme="light"] .chat-header-aluno .aluno-nome-chat {
+    color: var(--light-accent-primary);
+    text-shadow: none;
+}
+
+[data-theme="light"] .msg-professor {
     background-color: rgba(160, 0, 128, 0.1);
     border: 1px solid var(--light-accent-secondary);
 }
-[data-theme="light"] .mensagem.professor strong {
-    color: var(--light-accent-secondary);
-}
-[data-theme="light"] .mensagem.professor small {
+[data-theme="light"] .msg-professor span {
     color: rgba(160, 0, 128, 0.8);
 }
 
-
-[data-theme="light"] .mensagem.aluno {
+[data-theme="light"] .msg-aluno {
     background-color: rgba(0, 119, 179, 0.1);
     border: 1px solid var(--light-accent-primary);
 }
-[data-theme="light"] .mensagem.aluno strong {
-    color: var(--light-accent-primary);
-}
-[data-theme="light"] .mensagem.aluno small {
+[data-theme="light"] .msg-aluno span {
     color: rgba(0, 119, 179, 0.8);
 }
 
-[data-theme="light"] .chat-box hr {
-    border-top: 1px dashed var(--light-border-light);
-}
-
-[data-theme="light"] .form-mensagem {
+[data-theme="light"] .form-msg {
     border-top: 1px solid var(--light-border-light);
 }
 
-[data-theme="light"] .form-mensagem input[type="text"] {
+[data-theme="light"] .form-msg input[type="text"] {
     border: 1px solid var(--light-accent-primary);
     background: var(--light-card-bg);
     color: var(--light-primary-text-color);
     box-shadow: 0 0 8px rgba(0, 119, 179, 0.1);
 }
 
-[data-theme="light"] .form-mensagem input[type="text"]:focus {
+[data-theme="light"] .form-msg input[type="text"]:focus {
     border-color: var(--light-accent-secondary);
     box-shadow: 0 0 12px var(--light-accent-secondary);
 }
 
-[data-theme="light"] .form-mensagem button {
+[data-theme="light"] .form-msg button {
     background: var(--light-accent-primary);
     color: var(--light-main-bg);
     box-shadow: 0 0 10px var(--light-accent-primary);
 }
 
-[data-theme="light"] .form-mensagem button:hover {
+[data-theme="light"] .form-msg button:hover {
     background: var(--light-accent-primary);
     box-shadow: 0 0 20px var(--light-accent-primary);
 }
-
 
 @media (max-width: 992px) {
     .main-content {
         padding: 25px;
     }
-    .aluno-select {
+    .dashboard-header h1 {
+        font-size: 2rem;
+    }
+    .alunos {
         padding: 15px;
         margin-bottom: 25px;
     }
-    .aluno-select select {
+    .alunos select {
         padding: 12px 16px;
         font-size: 1rem;
         background-position: right 14px center;
         background-size: 16px auto;
     }
-    .chat-box {
+    .chat {
         padding: 15px;
         max-height: 400px;
     }
-    .mensagem {
+    .chat-header-aluno {
+        font-size: 1em;
+        margin-bottom: 15px;
+        padding: 8px 12px;
+    }
+    .mensagens {
+        margin-bottom: 15px;
+    }
+    .msg-professor, .msg-aluno {
         padding: 8px 12px;
         font-size: 0.9rem;
     }
-    .mensagem.professor {
+    .msg-professor {
         margin-left: 15%;
     }
-    .mensagem.aluno {
+    .msg-aluno {
         margin-right: 15%;
     }
-    .form-mensagem {
+    .form-msg {
         flex-direction: column;
         gap: 10px;
         padding-top: 10px;
     }
-    .form-mensagem input[type="text"] {
+    .form-msg input[type="text"] {
         padding: 10px 12px;
         font-size: 0.95rem;
     }
-    .form-mensagem button {
+    .form-msg button {
         padding: 10px;
         font-size: 0.95rem;
     }
@@ -674,32 +696,42 @@ body {
         min-height: auto;
         overflow-y: unset;
     }
-    .main-content > h1 {
+    .dashboard-header h1 {
         font-size: 1.8rem;
         margin-bottom: 20px;
     }
-    .aluno-select {
+    .alunos {
         margin-bottom: 20px;
     }
-    .chat-box {
+    .chat {
         max-height: 350px;
     }
-    .mensagem {
+    .chat-header-aluno {
+        font-size: 0.95em;
+        margin-bottom: 12px;
+        padding: 6px 10px;
+    }
+    .msg-professor, .msg-aluno {
         padding: 7px 10px;
         font-size: 0.85rem;
         margin-bottom: 10px;
     }
-    .mensagem.professor {
+    .msg-professor {
         margin-left: 10%;
     }
-    .mensagem.aluno {
+    .msg-aluno {
         margin-right: 10%;
     }
-    .form-mensagem input[type="text"] {
+    .form-msg {
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 10px;
+    }
+    .form-msg input[type="text"] {
         padding: 9px 10px;
         font-size: 0.9rem;
     }
-    .form-mensagem button {
+    .form-msg button {
         padding: 9px;
         font-size: 0.9rem;
     }
@@ -715,56 +747,49 @@ body {
     .main-content {
         padding: 10px;
     }
-    .main-content > h1 {
+    .dashboard-header h1 {
         font-size: 1.6rem;
         margin-bottom: 15px;
     }
-    .aluno-select {
+    .alunos {
         padding: 10px;
         gap: 10px;
     }
-    .aluno-select label {
-        font-size: 0.95rem;
-    }
-    .aluno-select select {
-        padding: 10px 12px;
+    .alunos select {
         font-size: 0.9rem;
+        padding: 10px 12px;
         background-position: right 10px center;
         background-size: 14px auto;
     }
-    .chat-box {
+    .chat {
         padding: 10px;
         max-height: 300px;
     }
-    .mensagem {
+    .chat-header-aluno {
+        font-size: 0.9em;
+        margin-bottom: 10px;
+        padding: 5px 8px;
+    }
+    .msg-professor, .msg-aluno {
         font-size: 0.8rem;
         margin-bottom: 8px;
         padding: 6px 9px;
     }
-    .mensagem strong {
-        font-size: 0.85rem;
-    }
-    .mensagem small {
-        font-size: 0.65rem;
-    }
-    .mensagem.professor {
+    .msg-professor {
         margin-left: 5%;
     }
-    .mensagem.aluno {
+    .msg-aluno {
         margin-right: 5%;
     }
-    .chat-box hr {
-        margin: 10px 0;
-    }
-    .form-mensagem {
+    .form-msg {
         gap: 8px;
         padding-top: 10px;
     }
-    .form-mensagem input[type="text"] {
+    .form-msg input[type="text"] {
         padding: 8px 10px;
         font-size: 0.85rem;
     }
-    .form-mensagem button {
+    .form-msg button {
         padding: 8px;
         font-size: 0.85rem;
     }
