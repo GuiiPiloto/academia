@@ -48,19 +48,24 @@ verificarLogin("aluno");
                 </thead>
                 <tbody>
                     <tr>
-                        <td>29/05/2025</td>
-                        <td>10:00</td>
-                        <td><span class="status presente">Presente</span></td>
+                        <td>09/06/2025</td>
+                        <td>06:30</td>
+                        <td><span class="status presente">Presença Registrada</span></td>
                     </tr>
                     <tr>
-                        <td>28/05/2025</td>
-                        <td>09:45</td>
-                        <td><span class="status presente">Presente</span></td>
+                        <td>10/06/2025</td>
+                        <td>N/A</td>
+                        <td><span class="status falta">Presença Não Registrada</span></td>
                     </tr>
                     <tr>
-                        <td>27/05/2025</td>
-                        <td>Faltou</td>
-                        <td><span class="status falta">Falta</span></td>
+                        <td>11/06/2025</td>
+                        <td>08:30</td>
+                        <td><span class="status presente">Presença Registrada</span></td>
+                    </tr>
+                    <tr>
+                        <td>12/06/2025</td>
+                        <td>N/A</td>
+                        <td><span class="status falta">Presença Não Registrada</span></td>
                     </tr>
                     <!-- Em breve: registros reais puxados do banco de dados -->
                 </tbody>
